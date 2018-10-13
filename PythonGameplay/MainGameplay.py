@@ -1,6 +1,6 @@
 from tkinter import *
 import time
-import datetime
+import Song
 
 tk = Tk()
 cvWidth = 500
@@ -12,20 +12,14 @@ cv.pack()
 
 startTime = time.time()
 
-#eventually this will be the tempo fo the song obtained from somewhere else (will be pipelined in from somewhere)
-songSpeed = -1
 #this should be a list of lists of tuples 'representing columns' of finger placement coordinates
 fingerPositions = []
-#below is dummty test for now
 
-#4 Test finger positions for now
-#initial X position off of the canvas, Y will be hardcoded constant for each ball Ex: (cvWidth + 50, 150)
-#The last tuple is the column's entry second
-fingerPositions = [[(100, 150), (), (100, 300), (), (1,)], [(200, 150), (), (), (), (9,)]]
-#fingerPositions.append([()])
+#below is dummy test call for now
+fingerPositions = Song.getFingerPositions()
 
 
-def tempDisplay(canvas, fingerPositions, songSpeed, startTime, pixelsMovedPerSec):
+def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -38,7 +32,7 @@ def tempDisplay(canvas, fingerPositions, songSpeed, startTime, pixelsMovedPerSec
                 #position balls based on time, the X is based on the time value, ballCoordY is the hardcoded height value
                 ballXPos = (cvWidth + 200) + (ballColSongTime*pixelsMovedPerSec)
                 print("startPos" + str(ballXPos))
-                ball = cv.create_oval(ballXPos, ballCoord[1], ballXPos + 60, ballCoord[1] + 60,
+                ball = cv.create_oval(ballXPos, ballCoord[1], ballXPos + 25, ballCoord[1] + 25,
                                       fill='black')
                 newBallColumn.append(ball)
         #append the time of col
@@ -56,7 +50,7 @@ def tempDisplay(canvas, fingerPositions, songSpeed, startTime, pixelsMovedPerSec
                 print("ballColumnSongTime: " + str(ballColSongTime))
                 print("preMove X coord" + str(canvas.coords(ball)[0]))
                 #the 0 is for the y movement; temp offset of (cvWidth + 60)
-                ballXPos = (cvWidth + 60) + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
+                ballXPos = initialSongOffest + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
                 print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
         canvas.update()
@@ -65,8 +59,9 @@ def tempDisplay(canvas, fingerPositions, songSpeed, startTime, pixelsMovedPerSec
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
             break
+    #closes window
     tk.destroy()
 
 
-tempDisplay(cv, fingerPositions, songSpeed, startTime, pixelsMovedPerSec=20)
+tempDisplay(cv, fingerPositions, startTime, pixelsMovedPerSec=30, initialSongOffest=cvWidth)
 tk.mainloop()
