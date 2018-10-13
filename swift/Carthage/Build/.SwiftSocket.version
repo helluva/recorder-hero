@@ -1,0 +1,24 @@
+{
+  "Mac" : [
+    {
+      "name" : "SwiftSocket",
+      "hash" : "977e884a2cd94b51ac3248a4eb20c5cddc06d24c3466a1171f5e6f1a5b1bc5a7"
+    }
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+    {
+      "name" : "SwiftSocket",
+      "hash" : "56d61ab10c49e0caf2fb2ebcfd7596008c22e419f213be047e402d0ed596fd29"
+    }
+  ],
+  "commitish" : "2.0.2",
+  "iOS" : [
+    {
+      "name" : "SwiftSocket",
+      "hash" : "386f0d72e8cd660a1c2d1fc83c1fec6cb428b25a4e7f093c11d4424bec75507d"
+    }
+  ]
+}
