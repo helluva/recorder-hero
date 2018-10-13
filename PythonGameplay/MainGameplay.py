@@ -62,12 +62,13 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 # Main run loop #
 #################
 
-def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
+def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
     #initailize noteline
-    noteLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, width='25', fill='gray')
-    tempLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, fill='black')
-    goodNoteBoundL = cvWidth/2 - ballSize
-    goodNoteBoundR = cvWidth/2 + ballSize
+    noteLine = cv.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
+    tempLine = cv.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
+    goodNoteBoundL = cvWidth/5 - ballSize
+    goodNoteBoundR = cvWidth/5 + ballSize
+    pointDisplay = cv.create_text(cvWidth - 80, 20, text='Points: 0')
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -79,31 +80,96 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
                 ballColSongTime = ballColumn[-1]
                 #position balls based on time, the X is based on the time value, ballCoordY is the hardcoded height value
                 ballXPos = (cvWidth + 200) + (ballColSongTime*pixelsMovedPerSec)
-                print("startPos" + str(ballXPos))
+                #print("startPos" + str(ballXPos))
                 ball = cv.create_oval(ballXPos, (i * 50) + 150, ballXPos + ballSize, (i * 50) + 150 + ballSize,
                                       fill='black')
                 newBallColumn.append(ball)
         #append the time of col to end of newBallColumn
         newBallColumn.append(ballColumn[-1])
         ballColumnsOnCanvas.append(newBallColumn)
-        print ("columnAdded")
+        #print ("columnAdded")
 
+    detectIndex = 0
+    points = 0
+    outsidePressLength = 0
+    mistake = True
+    columnPassed = False
+    endofNotes = False
     #note movement
     while(True):
         currentTime = time.time()
         #move all balls one 'movement'
         for ballColumn in ballColumnsOnCanvas:
-            print("ballColumn: " + str(ballColumn))
+            #print("ballColumn: " + str(ballColumn))
             for ball in ballColumn[0:len(ballColumn) - 1]:
                 ballColSongTime = ballColumn[-1]
-                print("ballColumnSongTime: " + str(ballColSongTime))
-                print("preMove X coord" + str(canvas.coords(ball)[0]))
+                #print("ballColumnSongTime: " + str(ballColSongTime))
+                #print("preMove X coord" + str(canvas.coords(ball)[0]))
                 #the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
                 ballXPos = initialSongOffest + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
-                print("ballXPos " + str(ballXPos))
+                #print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
         canvas.update()
         time.sleep(0.01)
+
+
+        #after all ball columns have been updated
+        #detect if proper notes are pressed in noteLine
+        #TODO have negative effect if notes pressed outside
+
+        columnToDetect = ballColumnsOnCanvas[detectIndex]
+        #if the left xValue for column or right XValue are within goodNoteLine
+        colXLeft = canvas.coords(columnToDetect[0])[0]
+        colXRight = canvas.coords(columnToDetect[0])[2]
+        if (((colXLeft <= goodNoteBoundR + 15) and colXRight > goodNoteBoundR) or ((colXRight >= goodNoteBoundL - 15) and colXLeft < goodNoteBoundL)):
+
+            correctFingering = [0, 0, 0, 0, 0, 0, 0]
+            for ball in columnToDetect[0:len(columnToDetect) - 1]:
+                #print(canvas.coords(ball))
+                ballY = canvas.coords(ball)[1]
+                correctFingerIndex = int((ballY - 150)/50)
+                correctFingering[correctFingerIndex] = 1
+            #if at any point the proper fingers were pressed
+            print("pressedFingers: " + str(pressedFingers))
+            print("correctFingering: " + str(correctFingering))
+            if (pressedFingers == correctFingering):
+                mistake = False
+        else:
+            #if buttons pressed outside you lose points
+            if (pressedFingers != [0, 0, 0, 0, 0, 0, 0] and outsidePressLength%15 == 0):
+                points -= 10
+            outsidePressLength += 1
+
+
+
+
+        if (colXRight < goodNoteBoundL and not endofNotes):
+            columnPassed = True
+
+        if(mistake and columnPassed):
+            #TODO decrement points
+            points -= 10
+            cv.itemconfig(pointDisplay, text="Points: " + str(points))
+            columnPassed = False
+            #so it will not go out of bounds and also handles last note case
+            if (detectIndex < len(ballColumnsOnCanvas) - 1):
+                detectIndex+=1
+            else:
+                endofNotes = True
+        elif((not mistake) and columnPassed):
+            #TODO increment points
+            points += 10
+            cv.itemconfig(pointDisplay, text="Points: " + str(points))
+            columnPassed = False
+            #so it will not go out of bounds and also handles last note case
+            if (detectIndex < len(ballColumnsOnCanvas) - 1):
+                detectIndex+=1
+            else:
+                endofNotes = True
+
+        print("Points: " + str(points))
+
+
 
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
@@ -112,5 +178,5 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
     tk.destroy()
 
 
-tempDisplay(cv, fingerPositions, startTime, pixelsMovedPerSec=30, initialSongOffest=cvWidth)
+startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=100, initialSongOffest=cvWidth)
 tk.mainloop()
