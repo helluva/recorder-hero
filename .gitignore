@@ -11,3 +11,5 @@ xcuserdata
 
 # Python
 __pycache__
+*/.idea/*
+.idea
