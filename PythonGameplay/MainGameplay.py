@@ -20,6 +20,11 @@ fingerPositions = Song.getFingerPositions()
 
 
 def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
+    #initailize noteline
+    noteLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, width='25', fill='gray')
+    tempLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, fill='black')
+    goodNoteBoundL = cvWidth/2 - 25
+    goodNoteBoundR = cvWidth/2 + 25
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -40,6 +45,7 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
         ballColumnsOnCanvas.append(newBallColumn)
         print ("columnAdded")
 
+    #note movement
     while(True):
         currentTime = time.time()
         #move all balls one 'movement'
@@ -49,7 +55,7 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
                 ballColSongTime = ballColumn[-1]
                 print("ballColumnSongTime: " + str(ballColSongTime))
                 print("preMove X coord" + str(canvas.coords(ball)[0]))
-                #the 0 is for the y movement; temp offset of (cvWidth + 60)
+                #the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
                 ballXPos = initialSongOffest + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
                 print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
