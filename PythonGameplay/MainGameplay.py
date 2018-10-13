@@ -1,8 +1,41 @@
 from tkinter import *
 import time
 import Song
+import keyboard
+from enum import Enum
 
 tk = Tk()
+
+
+
+################
+# Input handling -- the currently pressed fingers are stored in `pressedFingers`. e.g. [1, 0, 0, 1, 0, 0, 0]
+################
+
+class InputMode(Enum):
+    # (1) the server that talks to the iOS / macOS recorder app. Primary interaction mode
+    IOS_APP = 1
+    # (2) the 1-7 keys on the keyboard. Development / debugging mode.
+    KEYBOARD = 2
+
+CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+
+def didUpdatePressedFingers(updatedFingers):
+    global pressedFingers
+    pressedFingers = updatedFingers
+
+
+if CURRENT_INPUT_MODE is InputMode.IOS_APP:
+    pass # todo
+elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
+    keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
+
+
+
+#################
+# Tkinter setup #
+#################
+
 cvWidth = 500
 cvHeight = 700
 cv = Canvas(tk, width=cvWidth, height=cvHeight)
@@ -18,6 +51,15 @@ fingerPositions = []
 #below is dummy test call for now
 fingerPositions = Song.getFingerPositions()
 
+# The finger positions currently being pressed.
+# This is driven by either the iOS app or the keyboard (depending on the current configuration)
+pressedFingers = [0, 0, 0, 0, 0, 0, 0]
+
+
+
+#################
+# Main run loop #
+#################
 
 def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
 
