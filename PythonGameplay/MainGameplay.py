@@ -2,7 +2,11 @@ from tkinter import *
 import time
 import Song
 import keyboard
+import note
+import audio
+import server
 from enum import Enum
+from threading import Thread
 
 tk = Tk()
 
@@ -18,15 +22,19 @@ class InputMode(Enum):
     # (2) the 1-7 keys on the keyboard. Development / debugging mode.
     KEYBOARD = 2
 
+
 CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+
 
 def didUpdatePressedFingers(updatedFingers):
     global pressedFingers
     pressedFingers = updatedFingers
 
+    audio.play_note(note.note_for_recorder_press_combination(updatedFingers))
+
 
 if CURRENT_INPUT_MODE is InputMode.IOS_APP:
-    pass # todo
+    server.start_server(didUpdatePressedFingers)
 elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
     keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
 
@@ -177,6 +185,5 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
     #closes window
     tk.destroy()
 
-
-startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=100, initialSongOffest=cvWidth)
+startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=30, initialSongOffest=cvWidth)
 tk.mainloop()

@@ -71,7 +71,7 @@
       }
     }];
       
-    [self presentMessage:[NSString stringWithFormat:@"[you]: %@", message] isStatus:NO];
+    [self presentMessage:[NSString stringWithFormat:@"%@", message] isStatus:NO];
   }
 }
 
@@ -170,7 +170,7 @@
     PTExampleTextFrame *textFrame = (PTExampleTextFrame*)payload.data;
     textFrame->length = ntohl(textFrame->length);
     NSString *message = [[NSString alloc] initWithBytes:textFrame->utf8text length:textFrame->length encoding:NSUTF8StringEncoding];
-    [self presentMessage:[NSString stringWithFormat:@"[%@]: %@", channel.userInfo, message] isStatus:NO];
+    [self presentMessage:[NSString stringWithFormat:@"%@", message] isStatus:NO];
   } else if (type == PTExampleFrameTypePong) {
     [self pongWithTag:tag error:nil];
   }
