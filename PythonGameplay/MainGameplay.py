@@ -62,36 +62,42 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 #################
 
 def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
+    #initailize noteline
+    noteLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, width='25', fill='gray')
+    tempLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, fill='black')
+    goodNoteBoundL = cvWidth/2 - 25
+    goodNoteBoundR = cvWidth/2 + 25
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
     for ballColumn in fingerPositions:
         newBallColumn = []
-        # to not index the time
-        for ballCoord in ballColumn[0:len(ballColumn) - 1]:
-            if (ballCoord != ()):
-                ballColSongTime = ballColumn[-1][0]
+        # - 1 to not index the time
+        for i in range(0, len(ballColumn) - 1):
+            if (ballColumn[i] != 0):
+                ballColSongTime = ballColumn[-1]
                 #position balls based on time, the X is based on the time value, ballCoordY is the hardcoded height value
                 ballXPos = (cvWidth + 200) + (ballColSongTime*pixelsMovedPerSec)
                 print("startPos" + str(ballXPos))
-                ball = cv.create_oval(ballXPos, ballCoord[1], ballXPos + 25, ballCoord[1] + 25,
+                ball = cv.create_oval(ballXPos, (i * 50) + 150, ballXPos + 25, (i * 50) + 150 + 25,
                                       fill='black')
                 newBallColumn.append(ball)
-        #append the time of col
+        #append the time of col to end of newBallColumn
         newBallColumn.append(ballColumn[-1])
         ballColumnsOnCanvas.append(newBallColumn)
         print ("columnAdded")
 
+    #note movement
     while(True):
         currentTime = time.time()
         #move all balls one 'movement'
         for ballColumn in ballColumnsOnCanvas:
             print("ballColumn: " + str(ballColumn))
             for ball in ballColumn[0:len(ballColumn) - 1]:
-                ballColSongTime = ballColumn[-1][0]
+                ballColSongTime = ballColumn[-1]
                 print("ballColumnSongTime: " + str(ballColSongTime))
                 print("preMove X coord" + str(canvas.coords(ball)[0]))
-                #the 0 is for the y movement; temp offset of (cvWidth + 60)
+                #the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
                 ballXPos = initialSongOffest + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
                 print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
