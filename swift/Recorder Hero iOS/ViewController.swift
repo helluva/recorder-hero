@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import CoreAudio
 
 class ViewController: UIViewController {
 
@@ -48,6 +50,8 @@ class ViewController: UIViewController {
         connectionIndicator.layer.cornerRadius = connectionIndicator.frame.height / 2
         connectionIndicator.layer.masksToBounds = true
         updateConnectionIndicator(nil)
+        
+        configureAudioSession()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +77,59 @@ class ViewController: UIViewController {
             self.connectionIndicator.backgroundColor = PeertalkClient.shared.isConnected ? #colorLiteral(red: 0.7366020005, green: 0.9768045545, blue: 0.7366020005, alpha: 1) : #colorLiteral(red: 1, green: 0.6383535342, blue: 0.5749678938, alpha: 1)
         }, completion: nil)
     }
+    
+    
+    // MARK: - Audio experiment
+    
+    var recorder: AVAudioRecorder!
+    var levelTimer = Timer()
+    
+    let LEVEL_THRESHOLD: Float = -10.0
+    
+    func configureAudioSession() {
+        let documents = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+        let url = documents.appendingPathComponent("record.caf")
+        
+        let recordSettings: [String: Any] = [
+            AVFormatIDKey:              kAudioFormatAppleIMA4,
+            AVSampleRateKey:            44100.0,
+            AVNumberOfChannelsKey:      2,
+            AVEncoderBitRateKey:        12800,
+            AVLinearPCMBitDepthKey:     16,
+            AVEncoderAudioQualityKey:   AVAudioQuality.max.rawValue
+        ]
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playAndRecord, mode: .voiceChat, options: .duckOthers)
+            try audioSession.setActive(true)
+            try recorder = AVAudioRecorder(url:url, settings: recordSettings)
+            
+        } catch {
+            return
+        }
+        
+        recorder.prepareToRecord()
+        recorder.isMeteringEnabled = true
+        recorder.record()
+        
+        levelTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(levelTimerCallback), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func levelTimerCallback() {
+        recorder.updateMeters()
+        
+        let level = recorder.averagePower(forChannel: 0)
+        print(level)
+        
+        let isLoud = level > LEVEL_THRESHOLD
+        
+        print("~~~~ is loud ~~~~~")
+        
+        // do whatever you want with isLoud
+    }
+    
 
 }
 

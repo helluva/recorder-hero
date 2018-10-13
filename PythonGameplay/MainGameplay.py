@@ -118,6 +118,7 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
                 #print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
         canvas.update()
+
         time.sleep(0.01)
 
 
@@ -182,6 +183,7 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
             break
+
     #closes window
     tk.destroy()
 
