@@ -4,5 +4,5 @@ from tkinter import *
 #NO NEED FOR COORDS ANYMORE, JUST PUT 1 or 0 for if fingering position present in column
 #The last tuple is the column's entry time(second)
 def getFingerPositions():
-    fingerPositions = [[(100, 150), (), (100, 250), (), (1,)], [(200, 150), (), (), (), (9,)]]
-    return fingerPositions
+    dummyFingerPositions = [[1, 0, 1, 0, 1], [1, 0, 0, 0, 9]]
+    return dummyFingerPositions
