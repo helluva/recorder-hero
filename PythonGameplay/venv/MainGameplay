@@ -1,0 +1,13 @@
+from tkinter import *
+
+tk = Tk()
+cv = Canvas(tk, width=500, height=700)
+#this should be a list of lists of vertical finger placements
+fingerPositions = [[]]
+
+def tempDisplay(canvas):
+    ball = canvas.create_oval(10, 10, 60, 60, fill='black')
+    canvas.pack()
+    tk.mainloop()
+
+tempDisplay(cv)
