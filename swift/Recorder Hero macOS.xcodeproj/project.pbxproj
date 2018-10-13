@@ -10,17 +10,47 @@
 		2EA0FB9F2171B79D00596F12 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FB9E2171B79D00596F12 /* main.swift */; };
 		2EA0FBE32171BC9200596F12 /* PTServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FBE22171BC9200596F12 /* PTServerController.m */; };
 		2EA0FBE62171BCA500596F12 /* Peertalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE52171BCA500596F12 /* Peertalk.framework */; };
+		2EA0FBE82172349B00596F12 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; };
+		2EA0FBE9217235CC00596F12 /* SwiftSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FBEF217237A700596F12 /* libswiftCore.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBEA2172373600596F12 /* libswiftCore.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC0C21723E2900596F12 /* libswiftCore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBED2172376D00596F12 /* libswiftCore.dylib */; };
+		2EA0FC1421723E8300596F12 /* libswiftFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF3217237CC00596F12 /* libswiftFoundation.dylib */; };
+		2EA0FC1521723E8300596F12 /* libswiftCoreFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */; };
+		2EA0FC1621723E8300596F12 /* libswiftDispatch.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF2217237CC00596F12 /* libswiftDispatch.dylib */; };
+		2EA0FC1721723E8300596F12 /* libswiftDarwin.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBFC2172381E00596F12 /* libswiftDarwin.dylib */; };
+		2EA0FC1821723E8300596F12 /* libswiftCoreGraphics.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF92172380600596F12 /* libswiftCoreGraphics.dylib */; };
+		2EA0FC1921723E8300596F12 /* libswiftObjectiveC.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBFF2172384700596F12 /* libswiftObjectiveC.dylib */; };
+		2EA0FC1A21723E8300596F12 /* libswiftIOKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FC022172385E00596F12 /* libswiftIOKit.dylib */; };
+		2EA0FC1B21723E9500596F12 /* libswiftFoundation.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBF3217237CC00596F12 /* libswiftFoundation.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC1C21723E9500596F12 /* libswiftCoreFoundation.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC1D21723E9500596F12 /* libswiftDispatch.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBF2217237CC00596F12 /* libswiftDispatch.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC1E21723E9500596F12 /* libswiftDarwin.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBFC2172381E00596F12 /* libswiftDarwin.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC1F21723E9500596F12 /* libswiftCoreGraphics.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBF92172380600596F12 /* libswiftCoreGraphics.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC2021723E9500596F12 /* libswiftObjectiveC.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBFF2172384700596F12 /* libswiftObjectiveC.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC2121723E9500596F12 /* libswiftIOKit.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FC022172385E00596F12 /* libswiftIOKit.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2EA0FC2321723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FC2221723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib */; };
+		2EA0FC2421723EE600596F12 /* libswiftSwiftOnoneSupport.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FC2221723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		2EA0FB992171B79D00596F12 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				2EA0FBEF217237A700596F12 /* libswiftCore.dylib in CopyFiles */,
+				2EA0FBE9217235CC00596F12 /* SwiftSocket.framework in CopyFiles */,
+				2EA0FC1B21723E9500596F12 /* libswiftFoundation.dylib in CopyFiles */,
+				2EA0FC1C21723E9500596F12 /* libswiftCoreFoundation.dylib in CopyFiles */,
+				2EA0FC1D21723E9500596F12 /* libswiftDispatch.dylib in CopyFiles */,
+				2EA0FC1E21723E9500596F12 /* libswiftDarwin.dylib in CopyFiles */,
+				2EA0FC1F21723E9500596F12 /* libswiftCoreGraphics.dylib in CopyFiles */,
+				2EA0FC2021723E9500596F12 /* libswiftObjectiveC.dylib in CopyFiles */,
+				2EA0FC2421723EE600596F12 /* libswiftSwiftOnoneSupport.dylib in CopyFiles */,
+				2EA0FC2121723E9500596F12 /* libswiftIOKit.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -31,6 +61,17 @@
 		2EA0FBE12171BC9200596F12 /* PTServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTServerController.h; path = "Recorder Hero macOS/Peertalk Server/PTServerController.h"; sourceTree = SOURCE_ROOT; };
 		2EA0FBE22171BC9200596F12 /* PTServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTServerController.m; path = "Recorder Hero macOS/Peertalk Server/PTServerController.m"; sourceTree = SOURCE_ROOT; };
 		2EA0FBE52171BCA500596F12 /* Peertalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Peertalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EA0FBE72172349B00596F12 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSocket.framework; path = Carthage/Build/Mac/SwiftSocket.framework; sourceTree = "<group>"; };
+		2EA0FBEA2172373600596F12 /* libswiftCore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCore.dylib; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/libswiftCore.dylib; sourceTree = "<group>"; };
+		2EA0FBED2172376D00596F12 /* libswiftCore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCore.dylib; path = ../Frameworks/libswiftCore.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCoreFoundation.dylib; path = ../Frameworks/libswiftCoreFoundation.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBF2217237CC00596F12 /* libswiftDispatch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftDispatch.dylib; path = ../Frameworks/libswiftDispatch.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBF3217237CC00596F12 /* libswiftFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftFoundation.dylib; path = ../Frameworks/libswiftFoundation.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBF92172380600596F12 /* libswiftCoreGraphics.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCoreGraphics.dylib; path = ../Frameworks/libswiftCoreGraphics.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBFC2172381E00596F12 /* libswiftDarwin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftDarwin.dylib; path = ../Frameworks/libswiftDarwin.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FBFF2172384700596F12 /* libswiftObjectiveC.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftObjectiveC.dylib; path = ../Frameworks/libswiftObjectiveC.dylib; sourceTree = DEVELOPER_DIR; };
+		2EA0FC022172385E00596F12 /* libswiftIOKit.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftIOKit.dylib; path = ../../../../../../Frameworks/libswiftIOKit.dylib; sourceTree = SDKROOT; };
+		2EA0FC2221723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftSwiftOnoneSupport.dylib; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/../../../../../../../../../System/Library/PrivateFrameworks/Swift/libswiftSwiftOnoneSupport.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +80,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EA0FBE62171BCA500596F12 /* Peertalk.framework in Frameworks */,
+				2EA0FC0C21723E2900596F12 /* libswiftCore.dylib in Frameworks */,
+				2EA0FC1421723E8300596F12 /* libswiftFoundation.dylib in Frameworks */,
+				2EA0FC1521723E8300596F12 /* libswiftCoreFoundation.dylib in Frameworks */,
+				2EA0FC1621723E8300596F12 /* libswiftDispatch.dylib in Frameworks */,
+				2EA0FC1721723E8300596F12 /* libswiftDarwin.dylib in Frameworks */,
+				2EA0FC1821723E8300596F12 /* libswiftCoreGraphics.dylib in Frameworks */,
+				2EA0FC1921723E8300596F12 /* libswiftObjectiveC.dylib in Frameworks */,
+				2EA0FC1A21723E8300596F12 /* libswiftIOKit.dylib in Frameworks */,
+				2EA0FC2321723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib in Frameworks */,
+				2EA0FBE82172349B00596F12 /* SwiftSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +99,7 @@
 		2EA0FB922171B79D00596F12 = {
 			isa = PBXGroup;
 			children = (
+				2EA0FBEA2172373600596F12 /* libswiftCore.dylib */,
 				2EA0FB9D2171B79D00596F12 /* Recorder Hero macOS */,
 				2EA0FB9C2171B79D00596F12 /* Products */,
 				2EA0FBE42171BCA500596F12 /* Frameworks */,
@@ -85,6 +137,16 @@
 			isa = PBXGroup;
 			children = (
 				2EA0FBE52171BCA500596F12 /* Peertalk.framework */,
+				2EA0FBE72172349B00596F12 /* SwiftSocket.framework */,
+				2EA0FBED2172376D00596F12 /* libswiftCore.dylib */,
+				2EA0FBF3217237CC00596F12 /* libswiftFoundation.dylib */,
+				2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */,
+				2EA0FBF2217237CC00596F12 /* libswiftDispatch.dylib */,
+				2EA0FBFC2172381E00596F12 /* libswiftDarwin.dylib */,
+				2EA0FBF92172380600596F12 /* libswiftCoreGraphics.dylib */,
+				2EA0FBFF2172384700596F12 /* libswiftObjectiveC.dylib */,
+				2EA0FC022172385E00596F12 /* libswiftIOKit.dylib */,
+				2EA0FC2221723EDC00596F12 /* libswiftSwiftOnoneSupport.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,9 +158,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EA0FBA22171B79D00596F12 /* Build configuration list for PBXNativeTarget "Recorder Hero macOS" */;
 			buildPhases = (
+				2EA0FB992171B79D00596F12 /* CopyFiles */,
 				2EA0FB972171B79D00596F12 /* Sources */,
 				2EA0FB982171B79D00596F12 /* Frameworks */,
-				2EA0FB992171B79D00596F12 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -272,9 +334,19 @@
 		2EA0FBA32171B79D00596F12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../../../Frameworks",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero macOS/Peertalk Server/Bridging Header.h";
 				SWIFT_VERSION = 4.2;
@@ -284,9 +356,19 @@
 		2EA0FBA42171B79D00596F12 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../../../Frameworks",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero macOS/Peertalk Server/Bridging Header.h";
 				SWIFT_VERSION = 4.2;

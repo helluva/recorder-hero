@@ -1,11 +1,13 @@
-# Xcode
-
 .DS_Store
 */.DS_Store
 
+# swift
 swift/Cartfile.resolved
 swift/Carthage/Build/iOS/*
 swift/Carthage/Build/tvOS/*
 swift/Carthage/Checkouts/*
-
 xcuserdata
+
+
+# Python
+__pycache__
