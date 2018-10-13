@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EA0FBD12171B9AE00596F12 /* Peertalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBD02171B9AE00596F12 /* Peertalk.framework */; };
+		2EA0FBD22171B9AE00596F12 /* Peertalk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBD02171B9AE00596F12 /* Peertalk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2EA0FBDA2171BA8400596F12 /* PTClientController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FBD92171BA8400596F12 /* PTClientController.m */; };
+		2EA0FBDC2171BA9200596F12 /* PeertalkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FBDB2171BA9200596F12 /* PeertalkClient.swift */; };
+		2EC701072171A998003726A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC701062171A998003726A8 /* AppDelegate.swift */; };
+		2EC701092171A998003726A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC701082171A998003726A8 /* ViewController.swift */; };
+		2EC7010C2171A998003726A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7010A2171A998003726A8 /* Main.storyboard */; };
+		2EC7010E2171A999003726A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7010D2171A999003726A8 /* Assets.xcassets */; };
+		2EC701112171A999003726A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC7010F2171A999003726A8 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EC7011C2171AAA3003726A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2EA0FBD22171B9AE00596F12 /* Peertalk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2EA0FBD02171B9AE00596F12 /* Peertalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Peertalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EA0FBD42171BA1E00596F12 /* Bridging Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging Header.h"; sourceTree = "<group>"; };
+		2EA0FBD82171BA8400596F12 /* PTClientController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTClientController.h; sourceTree = "<group>"; };
+		2EA0FBD92171BA8400596F12 /* PTClientController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTClientController.m; sourceTree = "<group>"; };
+		2EA0FBDB2171BA9200596F12 /* PeertalkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeertalkClient.swift; sourceTree = "<group>"; };
+		2EC701032171A998003726A8 /* Recorder Hero iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recorder Hero iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC701062171A998003726A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2EC701082171A998003726A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2EC7010B2171A998003726A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2EC7010D2171A999003726A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EC701102171A999003726A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2EC701122171A999003726A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EC701002171A998003726A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA0FBD12171B9AE00596F12 /* Peertalk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EA0FBD32171BA0D00596F12 /* Peertalk Client */ = {
+			isa = PBXGroup;
+			children = (
+				2EA0FBDB2171BA9200596F12 /* PeertalkClient.swift */,
+				2EA0FBD42171BA1E00596F12 /* Bridging Header.h */,
+				2EA0FBD82171BA8400596F12 /* PTClientController.h */,
+				2EA0FBD92171BA8400596F12 /* PTClientController.m */,
+			);
+			path = "Peertalk Client";
+			sourceTree = "<group>";
+		};
+		2EC700FA2171A998003726A8 = {
+			isa = PBXGroup;
+			children = (
+				2EC701052171A998003726A8 /* Recorder Hero iOS */,
+				2EC701042171A998003726A8 /* Products */,
+				2EA0FBD02171B9AE00596F12 /* Peertalk.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		2EC701042171A998003726A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EC701032171A998003726A8 /* Recorder Hero iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EC701052171A998003726A8 /* Recorder Hero iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2EA0FBD32171BA0D00596F12 /* Peertalk Client */,
+				2EC701062171A998003726A8 /* AppDelegate.swift */,
+				2EC701082171A998003726A8 /* ViewController.swift */,
+				2EC7010A2171A998003726A8 /* Main.storyboard */,
+				2EC7010D2171A999003726A8 /* Assets.xcassets */,
+				2EC7010F2171A999003726A8 /* LaunchScreen.storyboard */,
+				2EC701122171A999003726A8 /* Info.plist */,
+			);
+			path = "Recorder Hero iOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EC701022171A998003726A8 /* Recorder Hero iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EC701152171A999003726A8 /* Build configuration list for PBXNativeTarget "Recorder Hero iOS" */;
+			buildPhases = (
+				2EC701002171A998003726A8 /* Frameworks */,
+				2EC700FF2171A998003726A8 /* Sources */,
+				2EC701012171A998003726A8 /* Resources */,
+				2EC7011C2171AAA3003726A8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Recorder Hero iOS";
+			productName = "Recorder Hero";
+			productReference = 2EC701032171A998003726A8 /* Recorder Hero iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EC700FB2171A998003726A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = Helluva;
+				TargetAttributes = {
+					2EC701022171A998003726A8 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+					};
+				};
+			};
+			buildConfigurationList = 2EC700FE2171A998003726A8 /* Build configuration list for PBXProject "Recorder Hero iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EC700FA2171A998003726A8;
+			productRefGroup = 2EC701042171A998003726A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EC701022171A998003726A8 /* Recorder Hero iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EC701012171A998003726A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EC701112171A999003726A8 /* LaunchScreen.storyboard in Resources */,
+				2EC7010E2171A999003726A8 /* Assets.xcassets in Resources */,
+				2EC7010C2171A998003726A8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EC700FF2171A998003726A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA0FBDA2171BA8400596F12 /* PTClientController.m in Sources */,
+				2EC701092171A998003726A8 /* ViewController.swift in Sources */,
+				2EC701072171A998003726A8 /* AppDelegate.swift in Sources */,
+				2EA0FBDC2171BA9200596F12 /* PeertalkClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2EC7010A2171A998003726A8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EC7010B2171A998003726A8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2EC7010F2171A999003726A8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EC701102171A999003726A8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EC701132171A999003726A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2EC701142171A999003726A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2EC701162171A999003726A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Recorder Hero iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "tech.gatech.helluva.Recorder-Hero";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero iOS/Peertalk Client/Bridging Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2EC701172171A999003726A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Recorder Hero iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "tech.gatech.helluva.Recorder-Hero";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero iOS/Peertalk Client/Bridging Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EC700FE2171A998003726A8 /* Build configuration list for PBXProject "Recorder Hero iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC701132171A999003726A8 /* Debug */,
+				2EC701142171A999003726A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EC701152171A999003726A8 /* Build configuration list for PBXNativeTarget "Recorder Hero iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EC701162171A999003726A8 /* Debug */,
+				2EC701172171A999003726A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EC700FB2171A998003726A8 /* Project object */;
+}
