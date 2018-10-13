@@ -14,10 +14,10 @@ import SwiftSocket
 // Python gameplay app
 
 // Peertalk talks to the iPhone over port 2345
-// The socket to the python gameplay UI is over port 1457
+// The socket to the python gameplay UI is over port ???
 
 let peertalkController = PTServerController()
-let socket = TCPClient(address: "localhost", port: 1457)
+let socket = TCPClient(address: "localhost", port: 1503)
 
 
 // MARK: - configure the Socket client
