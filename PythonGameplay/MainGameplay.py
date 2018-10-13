@@ -46,6 +46,7 @@ elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
 
 cvWidth = 500
 cvHeight = 700
+ballSize = 25
 cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
 tk.resizable(False, False)
@@ -73,8 +74,8 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
     #initailize noteline
     noteLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, width='25', fill='gray')
     tempLine = cv.create_line(cvWidth/2, 0, cvWidth/2, cvHeight, fill='black')
-    goodNoteBoundL = cvWidth/2 - 25
-    goodNoteBoundR = cvWidth/2 + 25
+    goodNoteBoundL = cvWidth/2 - ballSize
+    goodNoteBoundR = cvWidth/2 + ballSize
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -87,7 +88,7 @@ def tempDisplay(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSo
                 #position balls based on time, the X is based on the time value, ballCoordY is the hardcoded height value
                 ballXPos = (cvWidth + 200) + (ballColSongTime*pixelsMovedPerSec)
                 print("startPos" + str(ballXPos))
-                ball = cv.create_oval(ballXPos, (i * 50) + 150, ballXPos + 25, (i * 50) + 150 + 25,
+                ball = cv.create_oval(ballXPos, (i * 50) + 150, ballXPos + ballSize, (i * 50) + 150 + ballSize,
                                       fill='black')
                 newBallColumn.append(ball)
         #append the time of col to end of newBallColumn
