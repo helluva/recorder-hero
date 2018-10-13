@@ -9,4 +9,7 @@
 
 - (void)sendMessage:(NSString*)message;
 
+@property (nonatomic, copy, nullable) void (^connectionEstablishedBlock)(void);
+@property (nonatomic, copy, nullable) void (^connectionLostBlock)(void);
+
 @end

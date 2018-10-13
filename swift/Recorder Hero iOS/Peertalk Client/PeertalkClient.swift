@@ -21,6 +21,7 @@ class PeertalkClient: NSObject {
     
     // MARK: Instance
     
+    var isConnected = false
     private let controller = PTClientController()
     
     private override init() {
@@ -30,7 +31,31 @@ class PeertalkClient: NSObject {
     
     func connectToServer() {
         controller.setup()
+        
+        controller.connectionEstablishedBlock = { [weak self] in
+            self?.isConnected = true
+            NotificationCenter.default.post(name: .peertalkClientConnectionEstablishedNotification, object: nil)
+        }
+        
+        controller.connectionLostBlock = { [weak self] in
+            self?.isConnected = false
+            NotificationCenter.default.post(name: .peertalkClientConnectionLostNotification, object: nil)
+        }
+    }
+    
+    func sendMessage(_ message: String) {
+        controller.sendMessage(message)
     }
     
 }
 
+
+// MARK: Notifications
+
+extension NSNotification.Name {
+    
+    static let peertalkClientConnectionEstablishedNotification = NSNotification.Name("peertalkClientConnectionEstablishedNotification")
+    
+    static let peertalkClientConnectionLostNotification = NSNotification.Name("peertalkClientConnectionLostNotification")
+    
+}

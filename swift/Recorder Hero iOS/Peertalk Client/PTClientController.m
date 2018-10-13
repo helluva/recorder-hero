@@ -22,6 +22,11 @@
   [channel listenOnPort:PTExampleProtocolIPv4PortNumber IPv4Address:INADDR_LOOPBACK callback:^(NSError *error) {
     if (error) {
       NSLog(@"%@", [NSString stringWithFormat:@"Failed to listen on 127.0.0.1:%d: %@", PTExampleProtocolIPv4PortNumber, error]);
+        
+        if (self.connectionLostBlock) {
+          self.connectionLostBlock();
+        }
+        
     } else {
       NSLog(@"%@", [NSString stringWithFormat:@"Listening on 127.0.0.1:%d", PTExampleProtocolIPv4PortNumber]);
       self->serverChannel_ = channel;
@@ -124,6 +129,11 @@
   } else {
     NSLog(@"%@", [NSString stringWithFormat:@"Disconnected from %@", channel.userInfo]);
   }
+    
+  if (self.connectionLostBlock) {
+    self.connectionLostBlock();
+  }
+  
 }
 
 // For listening channels, this method is invoked when a new connection has been
@@ -141,6 +151,10 @@
   peerChannel_.userInfo = address;
   NSLog(@"%@", [NSString stringWithFormat:@"Connected to %@", address]);
   
+  if (self.connectionEstablishedBlock) {
+    self.connectionEstablishedBlock();
+  }
+    
   // Send some information about ourselves to the other end
   [self sendDeviceInfo];
 }
