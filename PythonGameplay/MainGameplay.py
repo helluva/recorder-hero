@@ -51,6 +51,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     goodNoteBoundL = cvWidth/5 - ballSize
     goodNoteBoundR = cvWidth/5 + ballSize
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
+    noteLineBalls = []
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -113,34 +114,42 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             correctFingering = [0, 0, 0, 0, 0, 0, 0]
             for ball in columnToDetect[0:len(columnToDetect) - 1]:
                 #print(canvas.coords(ball))
+                canvas.itemconfig(ball, fill='black')
                 ballY = canvas.coords(ball)[1]
                 correctFingerIndex = int((ballY - 150)/50)
                 correctFingering[correctFingerIndex] = 1
+            #temporary markers for what 'holes' are being pressed
+            for lineBall in noteLineBalls:
+                canvas.delete(lineBall)
+            for i in range(0, len(pressedFingers)):
+                if (pressedFingers[i] == 1):
+                    lineBall = canvas.create_oval(goodNoteBoundL + 15, (i * 50) + 150, goodNoteBoundL + 15 + ballSize, (i * 50) + 150 + ballSize,
+                                          fill='#e8ecf2')
+                    noteLineBalls.append(lineBall)
             #if at any point the proper fingers were pressed
             if (pressedFingers == correctFingering):
+                for ball in columnToDetect[0:len(columnToDetect) - 1]:
+                    canvas.itemconfig(ball, fill='green')
                 mistake = False
-        else:
-            #TODO POSSIBLE BUG AREA!!!!!
-            #if buttons pressed outside you lose points
-            if (pressedFingers != [0, 0, 0, 0, 0, 0, 0] and outsidePressLength%15 == 0):
-                points -= 10
-            outsidePressLength += 1
 
 
 
 
-        if (colXRight < goodNoteBoundL - 20 and not endofNotes):
+        if (colXRight < goodNoteBoundL - 5 and not endofNotes):
             columnPassed = True
 
         if(mistake and columnPassed):
             #TODO decrement points
-            points -= 10
+            #points -= 10
             canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
+                for ball in columnToDetect[0:len(columnToDetect) - 1]:
+                    canvas.itemconfig(ball, fill='red')
                 detectIndex+=1
             else:
+                #canvas.itemconfig(ball, fill='red')
                 endofNotes = True
         elif((not mistake) and columnPassed):
             #TODO increment points
@@ -150,12 +159,11 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
                 detectIndex+=1
+                mistake = True
             else:
                 endofNotes = True
 
         #print("Points: " + str(points))
-
-
 
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
