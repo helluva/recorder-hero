@@ -49,6 +49,9 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
     tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
+    finalAccuracyDisplay = canvas.create_text(cvWidth - 200, 200, font=('Verdana', 36), text='')
+    accuracy = 0
+    accuracyDisplay = canvas.create_text(cvWidth - 80, 40, text='Accuracy: ' + str(accuracy) + '%')
     darkLineBallList = []
 
     #create dark lineball markers
@@ -80,6 +83,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
 
     detectIndex = 0
     points = 0
+    ammountCorrect = 0
     outsidePressLength = 1
     mistake = True
     columnPassed = False
@@ -171,8 +175,25 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
                 detectIndex+=1
                 mistake = True
+                ammountCorrect += 1
+                accuracy = (ammountCorrect / len(fingerPositions)) * 100
+                print(accuracy)
+                canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
             else:
                 endofNotes = True
+                ammountCorrect += 1
+                accuracy = (ammountCorrect / len(fingerPositions)) * 100
+                print(accuracy)
+                canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
+                if (accuracy == 100.0):
+                    canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%' + '\nPerfect Score!')
+                elif (accuracy >= 80.0):
+                    canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%' + '\nPretty Good!')
+                elif (accuracy >= 70.0):
+                    canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nAlmost There!')
+                elif (accuracy < 70.0):
+                    print("test")
+                    canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nTry easy next time')
 
         #print("Points: " + str(points))
 

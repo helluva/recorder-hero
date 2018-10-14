@@ -1,4 +1,5 @@
 from tkinter import *
+from PIL import ImageTk, Image
 import time
 import Song
 import MainGameplay
@@ -37,7 +38,11 @@ def createMainMenu():
     rbHard.grid(row=1, column=3)
 
 
-    titleDisplay = cv.create_text(cvWidth / 2, 100, text='Recorder Hero', font=('Verdana', 36))
+    #titleDisplay = cv.create_text(cvWidth / 2, 100, text='Recorder Hero', font=('Verdana', 36))
+    recorderHeroTitleImage = Image.open('recorderHero.jpg')
+    print(recorderHeroTitleImage)
+    recorderHeroTitleImage = ImageTk.PhotoImage(image=recorderHeroTitleImage, size=100)
+    titleDisplay = cv.create_image(cvWidth / 2, 100, image=recorderHeroTitleImage)
 
     for (index, song) in enumerate(list(Song.Song)):
         songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Verdana', 16))
