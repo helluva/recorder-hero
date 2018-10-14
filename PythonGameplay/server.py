@@ -30,9 +30,11 @@ def connect_to_client(new_pressed_keys_update_handler):
     pressed_keys_update_handler = new_pressed_keys_update_handler
 
     # delicious Absolute Path goodness
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    passthrough_app_path = current_path + '/RHPassthrough.app/Contents/MacOS/RHPassthrough'
+    
     subprocess.Popen([
-        '/Users/cal/Library/Developer/Xcode/DerivedData/Recorder_Hero-evqvgmngagwutjcitsufenjwznhq/Build/Products/Debug/RHPassthrough.app/Contents/MacOS/RHPassthrough',
-        '-p', str(port)],
+        passthrough_app_path, '-p', str(port)],
         stderr=subprocess.DEVNULL)
 
     # still block launch until a connection is available
