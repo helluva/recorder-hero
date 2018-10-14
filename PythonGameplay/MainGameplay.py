@@ -50,7 +50,14 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     goodNoteBoundL = cvWidth/5 - ballSize
     goodNoteBoundR = cvWidth/5 + ballSize
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
-    noteLineBalls = []
+    darkLineBallList = []
+
+    #create dark lineball markers
+    for i in range(0, len(pressedFingers)):
+        darkLineBall = canvas.create_oval(goodNoteBoundL + 12, (i * 50) + 150,
+                                      goodNoteBoundL + 12 + ballSize, (i * 50) + 150 + ballSize,
+                                      fill='gray')
+        darkLineBallList.append(darkLineBall)
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
@@ -121,15 +128,16 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 correctFingering[correctFingerIndex] = 1
 
             #temporary markers for what 'holes' are being pressed
-            for lineBall in noteLineBalls:
-                canvas.delete(lineBall)
-
+            for lineBall in darkLineBallList:
+                #unfill lineballs
+                canvas.itemconfig(lineBall, fill='gray')
             for i in range(0, len(pressedFingers)):
                 if (pressedFingers[i] == 1):
-                    lineBall = canvas.create_oval(goodNoteBoundL + 15, (i * 50) + 150, goodNoteBoundL + 15 + ballSize, (i * 50) + 150 + ballSize,
-                                          fill='#e8ecf2')
-                    noteLineBalls.append(lineBall)
-
+                    #fill selected lineballs as 'selected'
+                    canvas.itemconfig(darkLineBallList[i], fill='#e8ecf2')
+            # #refill moving ball(s) so that they will be over the lineballs
+            # for closeBalls in ballColumnsOnCanvas[detectIndex]:
+            #     canvas.itemconfig(closeBalls, fill='black')
             #if at any point the proper fingers were pressed
             if (pressedFingers == correctFingering):
                 for ball in columnToDetect[0:len(columnToDetect) - 1]:
