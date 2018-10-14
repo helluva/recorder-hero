@@ -1,6 +1,7 @@
 import csv
 import note
-from enum import Enum
+from enum import Enum, auto
+
 
 class Difficulty(Enum):
     EASY = 4.0
@@ -8,8 +9,10 @@ class Difficulty(Enum):
     HARD = 1.0
 
 class Song(Enum):
-    Hot_Cross_Buns = 1
-    Party_Rock_Anthem_by_LMFAO = 2
+    Hot_Cross_Buns = auto()
+    Party_Rock_Anthem_by_LMFAO = auto()
+    I_Gotta_Feeling_by_The_Black_Eyed_Peas = auto()
+    Happy_Birthday = auto()
 
 
 def timed_finger_positions_for_song(song, difficulty):
