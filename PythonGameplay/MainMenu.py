@@ -45,7 +45,7 @@ def createMainMenu():
     titleDisplay = cv.create_image(cvWidth / 2, 100, image=recorderHeroTitleImage)
 
     for (index, song) in enumerate(list(Song.Song)):
-        songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Verdana', 16))
+        songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Times New Roman', 16))
         window = cv.create_window(cvWidth / 2, 250 + (50 * index), window=songButton, width=300)
 
 def difficultyChange(newSongDifficulty):
