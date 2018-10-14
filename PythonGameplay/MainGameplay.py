@@ -25,7 +25,6 @@ CURRENT_INPUT_MODE = InputMode.KEYBOARD;
 def didUpdatePressedFingers(updatedFingers):
     global pressedFingers
     pressedFingers = updatedFingers
-
     audio.play_note(note.note_for_recorder_press_combination(updatedFingers))
 
 def bootstrap_input():
@@ -79,8 +78,10 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     mistake = True
     columnPassed = False
     endofNotes = False
+
     #note movement
     while(True):
+        global pressedFingers
 
         server.check_for_updates()
 
@@ -118,14 +119,17 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 ballY = canvas.coords(ball)[1]
                 correctFingerIndex = int((ballY - 150)/50)
                 correctFingering[correctFingerIndex] = 1
+
             #temporary markers for what 'holes' are being pressed
             for lineBall in noteLineBalls:
                 canvas.delete(lineBall)
+
             for i in range(0, len(pressedFingers)):
                 if (pressedFingers[i] == 1):
                     lineBall = canvas.create_oval(goodNoteBoundL + 15, (i * 50) + 150, goodNoteBoundL + 15 + ballSize, (i * 50) + 150 + ballSize,
                                           fill='#e8ecf2')
                     noteLineBalls.append(lineBall)
+
             #if at any point the proper fingers were pressed
             if (pressedFingers == correctFingering):
                 for ball in columnToDetect[0:len(columnToDetect) - 1]:

@@ -26,6 +26,7 @@ def createMainMenu():
         songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Verdana', 16))
         window = cv.create_window(cvWidth / 2, 250 + (50 * index), window=songButton, width=300)
 
+    tk.update_idletasks()
 
 
 def startGameplayForSong(song):

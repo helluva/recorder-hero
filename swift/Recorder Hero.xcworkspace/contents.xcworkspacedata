@@ -5,7 +5,7 @@
       location = "group:Recorder Hero iOS.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Recorder Hero macOS.xcodeproj">
+      location = "group:/Users/cal/Documents/Xcode/recorder-hero/swift/Recorder Hero macOS.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Peertalk/peertalk.xcodeproj">
