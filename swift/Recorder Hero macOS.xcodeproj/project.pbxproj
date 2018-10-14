@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2EA0FB9F2171B79D00596F12 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FB9E2171B79D00596F12 /* main.swift */; };
-		2EA0FBE32171BC9200596F12 /* PTServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0FBE22171BC9200596F12 /* PTServerController.m */; };
+		2E0E8AC92172F213000BDEED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0E8AC82172F213000BDEED /* AppDelegate.swift */; };
+		2E0E8ACB2172F215000BDEED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E0E8ACA2172F215000BDEED /* Assets.xcassets */; };
+		2E0E8ACE2172F215000BDEED /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E0E8ACC2172F215000BDEED /* MainMenu.xib */; };
+		2E0E8AD82172F292000BDEED /* PTServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E0E8AD72172F292000BDEED /* PTServerController.m */; };
+		2E0E8AD92172F29E000BDEED /* Peertalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE52171BCA500596F12 /* Peertalk.framework */; };
+		2E0E8ADA2172F29E000BDEED /* Peertalk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE52171BCA500596F12 /* Peertalk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E0E8ADB2172F29E000BDEED /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; };
+		2E0E8ADC2172F29E000BDEED /* SwiftSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EA0FBE62171BCA500596F12 /* Peertalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE52171BCA500596F12 /* Peertalk.framework */; };
 		2EA0FBE82172349B00596F12 /* SwiftSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; };
 		2EA0FBE9217235CC00596F12 /* SwiftSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBE72172349B00596F12 /* SwiftSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		2EA0FBEF217237A700596F12 /* libswiftCore.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2EA0FBEA2172373600596F12 /* libswiftCore.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2EA0FC0C21723E2900596F12 /* libswiftCore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBED2172376D00596F12 /* libswiftCore.dylib */; };
 		2EA0FC1421723E8300596F12 /* libswiftFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF3217237CC00596F12 /* libswiftFoundation.dylib */; };
 		2EA0FC1521723E8300596F12 /* libswiftCoreFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */; };
@@ -33,13 +38,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		2E0E8ADD2172F29E000BDEED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2E0E8ADA2172F29E000BDEED /* Peertalk.framework in Embed Frameworks */,
+				2E0E8ADC2172F29E000BDEED /* SwiftSocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2EA0FB992171B79D00596F12 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				2EA0FBEF217237A700596F12 /* libswiftCore.dylib in CopyFiles */,
 				2EA0FBE9217235CC00596F12 /* SwiftSocket.framework in CopyFiles */,
 				2EA0FC1B21723E9500596F12 /* libswiftFoundation.dylib in CopyFiles */,
 				2EA0FC1C21723E9500596F12 /* libswiftCoreFoundation.dylib in CopyFiles */,
@@ -55,14 +71,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E0E8AC62172F213000BDEED /* RHPassthrough.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RHPassthrough.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E0E8AC82172F213000BDEED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2E0E8ACA2172F215000BDEED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2E0E8ACD2172F215000BDEED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2E0E8ACF2172F215000BDEED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E0E8AD02172F215000BDEED /* Recorder_Hero_macOS_Passthrough.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Recorder_Hero_macOS_Passthrough.entitlements; sourceTree = "<group>"; };
+		2E0E8AD52172F292000BDEED /* PTServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTServerController.h; sourceTree = "<group>"; };
+		2E0E8AD62172F292000BDEED /* Bridging Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging Header.h"; sourceTree = "<group>"; };
+		2E0E8AD72172F292000BDEED /* PTServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTServerController.m; sourceTree = "<group>"; };
 		2EA0FB9B2171B79D00596F12 /* Recorder Hero macOS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Recorder Hero macOS"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2EA0FB9E2171B79D00596F12 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		2EA0FBDD2171BBD600596F12 /* Bridging Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging Header.h"; path = "Recorder Hero macOS/Peertalk Server/Bridging Header.h"; sourceTree = SOURCE_ROOT; };
-		2EA0FBE12171BC9200596F12 /* PTServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTServerController.h; path = "Recorder Hero macOS/Peertalk Server/PTServerController.h"; sourceTree = SOURCE_ROOT; };
-		2EA0FBE22171BC9200596F12 /* PTServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTServerController.m; path = "Recorder Hero macOS/Peertalk Server/PTServerController.m"; sourceTree = SOURCE_ROOT; };
 		2EA0FBE52171BCA500596F12 /* Peertalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Peertalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA0FBE72172349B00596F12 /* SwiftSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSocket.framework; path = Carthage/Build/Mac/SwiftSocket.framework; sourceTree = "<group>"; };
-		2EA0FBEA2172373600596F12 /* libswiftCore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCore.dylib; path = ../../../../../../Applications/Xcode.app/Contents/Frameworks/libswiftCore.dylib; sourceTree = "<group>"; };
 		2EA0FBED2172376D00596F12 /* libswiftCore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCore.dylib; path = ../Frameworks/libswiftCore.dylib; sourceTree = DEVELOPER_DIR; };
 		2EA0FBF0217237B900596F12 /* libswiftCoreFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftCoreFoundation.dylib; path = ../Frameworks/libswiftCoreFoundation.dylib; sourceTree = DEVELOPER_DIR; };
 		2EA0FBF2217237CC00596F12 /* libswiftDispatch.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswiftDispatch.dylib; path = ../Frameworks/libswiftDispatch.dylib; sourceTree = DEVELOPER_DIR; };
@@ -75,6 +95,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2E0E8AC32172F213000BDEED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E0E8AD92172F29E000BDEED /* Peertalk.framework in Frameworks */,
+				2E0E8ADB2172F29E000BDEED /* SwiftSocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2EA0FB982171B79D00596F12 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,11 +125,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E0E8AC72172F213000BDEED /* Recorder Hero macOS Passthrough */ = {
+			isa = PBXGroup;
+			children = (
+				2E0E8AD42172F292000BDEED /* Peertalk Server */,
+				2E0E8AC82172F213000BDEED /* AppDelegate.swift */,
+				2E0E8ACA2172F215000BDEED /* Assets.xcassets */,
+				2E0E8ACC2172F215000BDEED /* MainMenu.xib */,
+				2E0E8ACF2172F215000BDEED /* Info.plist */,
+				2E0E8AD02172F215000BDEED /* Recorder_Hero_macOS_Passthrough.entitlements */,
+			);
+			path = "Recorder Hero macOS Passthrough";
+			sourceTree = "<group>";
+		};
+		2E0E8AD42172F292000BDEED /* Peertalk Server */ = {
+			isa = PBXGroup;
+			children = (
+				2E0E8AD52172F292000BDEED /* PTServerController.h */,
+				2E0E8AD62172F292000BDEED /* Bridging Header.h */,
+				2E0E8AD72172F292000BDEED /* PTServerController.m */,
+			);
+			path = "Peertalk Server";
+			sourceTree = "<group>";
+		};
 		2EA0FB922171B79D00596F12 = {
 			isa = PBXGroup;
 			children = (
-				2EA0FBEA2172373600596F12 /* libswiftCore.dylib */,
-				2EA0FB9D2171B79D00596F12 /* Recorder Hero macOS */,
+				2E0E8AC72172F213000BDEED /* Recorder Hero macOS Passthrough */,
 				2EA0FB9C2171B79D00596F12 /* Products */,
 				2EA0FBE42171BCA500596F12 /* Frameworks */,
 			);
@@ -110,28 +161,10 @@
 			isa = PBXGroup;
 			children = (
 				2EA0FB9B2171B79D00596F12 /* Recorder Hero macOS */,
+				2E0E8AC62172F213000BDEED /* RHPassthrough.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		2EA0FB9D2171B79D00596F12 /* Recorder Hero macOS */ = {
-			isa = PBXGroup;
-			children = (
-				2EA0FBB92171B85100596F12 /* Peertalk Server */,
-				2EA0FB9E2171B79D00596F12 /* main.swift */,
-			);
-			path = "Recorder Hero macOS";
-			sourceTree = "<group>";
-		};
-		2EA0FBB92171B85100596F12 /* Peertalk Server */ = {
-			isa = PBXGroup;
-			children = (
-				2EA0FBDD2171BBD600596F12 /* Bridging Header.h */,
-				2EA0FBE12171BC9200596F12 /* PTServerController.h */,
-				2EA0FBE22171BC9200596F12 /* PTServerController.m */,
-			);
-			path = "Peertalk Server";
-			sourceTree = SOURCE_ROOT;
 		};
 		2EA0FBE42171BCA500596F12 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -154,6 +187,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2E0E8AC52172F213000BDEED /* RHPassthrough */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2E0E8AD12172F215000BDEED /* Build configuration list for PBXNativeTarget "RHPassthrough" */;
+			buildPhases = (
+				2E0E8AC22172F213000BDEED /* Sources */,
+				2E0E8AC32172F213000BDEED /* Frameworks */,
+				2E0E8AC42172F213000BDEED /* Resources */,
+				2E0E8ADD2172F29E000BDEED /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RHPassthrough;
+			productName = "Recorder Hero macOS Passthrough";
+			productReference = 2E0E8AC62172F213000BDEED /* RHPassthrough.app */;
+			productType = "com.apple.product-type.application";
+		};
 		2EA0FB9A2171B79D00596F12 /* Recorder Hero macOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EA0FBA22171B79D00596F12 /* Build configuration list for PBXNativeTarget "Recorder Hero macOS" */;
@@ -181,6 +232,14 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Helluva;
 				TargetAttributes = {
+					2E0E8AC52172F213000BDEED = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
 					2EA0FB9A2171B79D00596F12 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -192,6 +251,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 2EA0FB922171B79D00596F12;
 			productRefGroup = 2EA0FB9C2171B79D00596F12 /* Products */;
@@ -199,23 +259,102 @@
 			projectRoot = "";
 			targets = (
 				2EA0FB9A2171B79D00596F12 /* Recorder Hero macOS */,
+				2E0E8AC52172F213000BDEED /* RHPassthrough */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2E0E8AC42172F213000BDEED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E0E8ACB2172F215000BDEED /* Assets.xcassets in Resources */,
+				2E0E8ACE2172F215000BDEED /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		2E0E8AC22172F213000BDEED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E0E8AD82172F292000BDEED /* PTServerController.m in Sources */,
+				2E0E8AC92172F213000BDEED /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2EA0FB972171B79D00596F12 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EA0FBE32171BC9200596F12 /* PTServerController.m in Sources */,
-				2EA0FB9F2171B79D00596F12 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		2E0E8ACC2172F215000BDEED /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2E0E8ACD2172F215000BDEED /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		2E0E8AD22172F215000BDEED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "Recorder Hero macOS Passthrough/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "tech.gatech.helluva.Recorder-Hero-macOS-Passthrough";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero macOS Passthrough/Peertalk Server/Bridging Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		2E0E8AD32172F215000BDEED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = FZ89A5SZ7C;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = "Recorder Hero macOS Passthrough/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "tech.gatech.helluva.Recorder-Hero-macOS-Passthrough";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Recorder Hero macOS Passthrough/Peertalk Server/Bridging Header.h";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 		2EA0FBA02171B79D00596F12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -378,6 +517,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2E0E8AD12172F215000BDEED /* Build configuration list for PBXNativeTarget "RHPassthrough" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E0E8AD22172F215000BDEED /* Debug */,
+				2E0E8AD32172F215000BDEED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2EA0FB962171B79D00596F12 /* Build configuration list for PBXProject "Recorder Hero macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

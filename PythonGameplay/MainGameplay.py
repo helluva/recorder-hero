@@ -25,7 +25,6 @@ CURRENT_INPUT_MODE = InputMode.KEYBOARD;
 def didUpdatePressedFingers(updatedFingers):
     global pressedFingers
     pressedFingers = updatedFingers
-
     audio.play_note(note.note_for_recorder_press_combination(updatedFingers))
 
 def bootstrap_input():
@@ -86,8 +85,10 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     mistake = True
     columnPassed = False
     endofNotes = False
+
     #note movement
     while(True):
+        global pressedFingers
 
         server.check_for_updates()
 
