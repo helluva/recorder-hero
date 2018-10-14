@@ -1,4 +1,7 @@
 import time
+
+from PIL import ImageTk, Image
+
 import keyboard
 import note
 import audio
@@ -45,8 +48,11 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
     global pressedFingers
 
-    #initailize noteline
+    song_background_image = ImageTk.PhotoImage(image=Image.open('images/' + song.name.replace('_', ' ') + '-500.jpg'))
+    canvas.create_image(250, 545, image=song_background_image)
 
+
+    #initailize noteline
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
     tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
@@ -76,7 +82,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
     finger_positions = Song.timed_finger_positions_for_song(song, difficulty)
     rest_timings = Song.rest_timings_for_song(song, difficulty)
     cut_short_timings = Song.cut_short_timings_for_song(song, difficulty)
-    print(cut_short_timings)
 
     for ballColumn in finger_positions:
         newBallColumn = []
@@ -222,13 +227,11 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 mistake = True
                 ammountCorrect += 1
                 accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
-                print(accuracy)
                 canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
             else:
                 endofNotes = True
                 ammountCorrect += 1
                 accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
-                print(accuracy)
                 canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
                 if (accuracy == 100.0):
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%' + '\nPerfect Score!')
@@ -237,7 +240,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 elif (accuracy >= 70.0):
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nAlmost There!')
                 elif (accuracy < 70.0):
-                    print("test")
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nTry easy next time')
 
         #if the right XCoord of the last column is past the left window boundary end the game
@@ -247,4 +249,3 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
     audio.play_note(None)
     time.sleep(3)
     canvas.delete("all")
-    #tk.destroy()

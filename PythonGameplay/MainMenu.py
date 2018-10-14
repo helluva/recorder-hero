@@ -15,18 +15,19 @@ MainGameplay.bootstrap_input()
 
 cvWidth = 500
 cvHeight = 700
+cvHeightOffsetForRadioFrameArea = 50
 ballSize = 25
+
+cv = Canvas(tk, width=cvWidth, height=cvHeight - cvHeightOffsetForRadioFrameArea)
+tk.title("Recorder Hero")
+cv.pack()
+radioFrame = Frame(tk)
+recorderHeroTitleImage = ImageTk.PhotoImage(image=Image.open('images/recorderHero-500.jpg'))
 
 # place the window in the middle of the screen
 x = (tk.winfo_screenwidth() / 2) - (cvWidth/2)
 y = (tk.winfo_screenheight() / 2) - (cvHeight/2)
 tk.geometry('%dx%d+%d+%d' % (cvWidth, cvHeight, x, y - 25))
-
-cv = Canvas(tk, width=cvWidth, height=cvHeight)
-tk.title("Recorder Hero")
-cv.pack()
-radioFrame = Frame(tk)
-recorderHeroTitleImage = ImageTk.PhotoImage(image=Image.open('recorderHero-500.jpg'))
 
 #default difficulty
 songDifficulty = Song.Difficulty.EASY
@@ -35,7 +36,6 @@ songDifficulty_radioVariable = StringVar(value=songDifficulty.name)
 
 def createMainMenu():
     global songDifficulty_radioVariable
-    radioFrame.pack()
 
     rbEasy = Radiobutton(radioFrame,
         text="Easy\n\n", variable=songDifficulty_radioVariable, value="EASY",
@@ -55,6 +55,7 @@ def createMainMenu():
     rbEasy.grid(row=1, column=1)
     rbMedium.grid(row=1, column=2)
     rbHard.grid(row=1, column=3)
+    radioFrame.pack()
 
     global recorderHeroTitleImage
     cv.create_image(250, 155, image=recorderHeroTitleImage)
@@ -70,10 +71,19 @@ def difficultyChange(newSongDifficulty):
     print(songDifficulty_radioVariable.get())
 
 def startGameplayForSong(song):
-    cv.delete("all")
+    global cv
+    cv.destroy()
+    cv = Canvas(tk, width=cvWidth, height=cvHeight)
+    cv.pack()
+
     radioFrame.pack_forget()
     startTime = time.time()
     MainGameplay.startGame(cv, song, songDifficulty, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec=150, initialSongOffest=0)
+
+    # after the gameplay is over, set up the menu again
+    cv.destroy()
+    cv = Canvas(tk, width=cvWidth, height=cvHeight - cvHeightOffsetForRadioFrameArea)
+    cv.pack()
     createMainMenu()
 
 createMainMenu()
