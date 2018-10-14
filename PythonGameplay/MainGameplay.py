@@ -134,6 +134,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             correctFingering = [0, 0, 0, 0, 0, 0, 0]
             for ball in columnToDetect[0:len(columnToDetect) - 1]:
                 #print(canvas.coords(ball))
+                canvas.itemconfig(ball, fill='black')
                 ballY = canvas.coords(ball)[1]
                 correctFingerIndex = int((ballY - 150)/50)
                 correctFingering[correctFingerIndex] = 1
@@ -141,6 +142,8 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             print("pressedFingers: " + str(pressedFingers))
             print("correctFingering: " + str(correctFingering))
             if (pressedFingers == correctFingering):
+                for ball in columnToDetect[0:len(columnToDetect) - 1]:
+                    canvas.itemconfig(ball, fill='green')
                 mistake = False
         else:
             #TODO POSSIBLE BUG AREA!!!!!
@@ -152,7 +155,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
 
 
 
-        if (colXRight < goodNoteBoundL - 20 and not endofNotes):
+        if (colXRight < goodNoteBoundL - 5 and not endofNotes):
             columnPassed = True
 
         if(mistake and columnPassed):
@@ -162,8 +165,11 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             columnPassed = False
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
+                for ball in columnToDetect[0:len(columnToDetect) - 1]:
+                    canvas.itemconfig(ball, fill='red')
                 detectIndex+=1
             else:
+                canvas.itemconfig(ball, fill='red')
                 endofNotes = True
         elif((not mistake) and columnPassed):
             #TODO increment points
