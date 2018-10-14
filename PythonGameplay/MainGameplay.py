@@ -215,7 +215,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 endofNotes = True
                 ammountCorrect += 1
                 accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
-                print(accuracy)
                 canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
                 if (accuracy == 100.0):
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%' + '\nPerfect Score!')
@@ -224,7 +223,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 elif (accuracy >= 70.0):
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nAlmost There!')
                 elif (accuracy < 70.0):
-                    print("test")
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nTry easy next time')
 
         #if the right XCoord of the last column is past the left window boundary end the game
