@@ -26,7 +26,7 @@ cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
 cv.pack()
 radioFrame = Frame(tk)
-recorderHeroTitleImage = ImageTk.PhotoImage(image=Image.open('recorderHero-500.jpg'))
+recorderHeroTitleImage = ImageTk.PhotoImage(image=Image.open('images/recorderHero-500.jpg'))
 
 #default difficulty
 songDifficulty = Song.Difficulty.EASY
