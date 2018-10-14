@@ -26,14 +26,16 @@ def createMainMenu():
 
     selectedDifficulty = StringVar()
 
-    rbEasy = Radiobutton(radioFrame, text="Easy", variable=selectedDifficulty, command=lambda: difficultyChange(Song.Difficulty.EASY))
+    rbEasy = Radiobutton(radioFrame, text="Easy", variable=selectedDifficulty, value="E", command=lambda: difficultyChange(Song.Difficulty.EASY))
     rbEasy.grid(row=1, column=1)
+    rbEasy.focus_set()
 
     rbMedium = Radiobutton(radioFrame, text="Medium", variable=selectedDifficulty, value="M", command=lambda: difficultyChange(Song.Difficulty.MEDIUM))
     rbMedium.grid(row=1, column=2)
 
     rbHard = Radiobutton(radioFrame, text="Hard", variable=selectedDifficulty, value="H", command=lambda: difficultyChange(Song.Difficulty.HARD))
     rbHard.grid(row=1, column=3)
+
 
     titleDisplay = cv.create_text(cvWidth / 2, 100, text='Recorder Hero', font=('Verdana', 36))
 
