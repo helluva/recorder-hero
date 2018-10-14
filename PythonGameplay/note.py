@@ -1,8 +1,8 @@
 
 
 pressed_fingers_to_notes_mapping = {
-    #'1111111': 'c1',   # we can't actually use these notes,
-    '1111010': 'd1',   # because iPhone multitouch only supports 5 taps at a time
+    # '1111111': 'c1', # we can't actually use this note, because iPhone multitouch only supports 5 taps at a time
+    '1111010': 'd1',
     '1111100': 'e1',
     '1111000': 'f1',
     '1110000': 'g1',

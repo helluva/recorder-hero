@@ -3,6 +3,7 @@ import keyboard
 import note
 import audio
 import server
+import Song
 from enum import Enum
 
 tk = None # dependency-injected from MainMenu
@@ -19,7 +20,7 @@ class InputMode(Enum):
     KEYBOARD = 2
 
 
-CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+CURRENT_INPUT_MODE = InputMode.IOS_APP;
 
 
 def didUpdatePressedFingers(updatedFingers):
@@ -41,7 +42,7 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 # Main run loop #
 #################
 
-def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
+def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
     global pressedFingers
 
     #initailize noteline
@@ -64,7 +65,12 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
 
-    for ballColumn in fingerPositions:
+    finger_positions = Song.timed_finger_positions_for_song(song, difficulty)
+    rest_timings = Song.rest_timings_for_song(song, difficulty)
+    cut_short_timings = Song.cut_short_timings_for_song(song, difficulty)
+    print(cut_short_timings)
+
+    for ballColumn in finger_positions:
         newBallColumn = []
         # - 1 to not index the time
         for i in range(0, len(ballColumn) - 1):
@@ -79,13 +85,13 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         #append the time of col to end of newBallColumn
         newBallColumn.append(ballColumn[-1])
         ballColumnsOnCanvas.append(newBallColumn)
-        #print ("columnAdded")
 
     detectIndex = 0
     points = 0
     ammountCorrect = 0
     outsidePressLength = 1
     mistake = True
+    soundHasBeenPlayedForColumn = False
     columnPassed = False
     endofNotes = False
 
@@ -95,16 +101,25 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         server.check_for_updates()
 
         currentTime = time.time()
+        currentTimecode = (currentTime - startTime)
+
         #move all balls one 'movement'
         for ballColumn in ballColumnsOnCanvas:
             for ball in ballColumn[0:len(ballColumn) - 1]:
                 ballColSongTime = ballColumn[-1]
                 #the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
-                ballTimecode = (ballColSongTime - (currentTime - startTime))
+                ballTimecode = (ballColSongTime - currentTimecode)
                 ballXPos = initialSongOffest + (ballTimecode * pixelsMovedPerSec)
 
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
+
         canvas.update()
+
+
+        # if this time code is close to a rest, stop playing
+        for rest_time in rest_timings:
+            if abs(rest_time - (currentTimecode + 0.75)) < 0.4:
+                audio.play_note(None)
 
         time.sleep(0.001)
 
@@ -129,8 +144,6 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         # calculate the correct fingering for this column
         correctFingering = [0, 0, 0, 0, 0, 0, 0]
         for ball in columnToDetect[0:len(columnToDetect) - 1]:
-            # print(canvas.coords(ball))
-            canvas.itemconfig(ball, fill='black')
             ballY = canvas.coords(ball)[1]
 
             correctFingerIndex = int((ballY - 150) / 50)
@@ -141,9 +154,17 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         recorderLineCenterX = 113
         columnDistanceFromRecorderLine = (ballCenterX - recorderLineCenterX)
 
-        if abs(columnDistanceFromRecorderLine) < 10 and (pressedFingers == correctFingering):
+        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn and (pressedFingers == correctFingering):
             note_to_play = note.note_for_recorder_press_combination(correctFingering)
-            audio.play_note(note_to_play)
+
+            should_cut_short = False
+
+            for cut_short_time in cut_short_timings:
+                if abs(cut_short_time - (currentTimecode + 0.75)) < 0.2:
+                    should_cut_short = True
+
+            audio.play_note(note_to_play, cut_short=should_cut_short)
+            soundHasBeenPlayedForColumn = True
 
             for ball in columnToDetect[0:len(columnToDetect) - 1]:
                 canvas.itemconfig(ball, fill='green')
@@ -154,8 +175,8 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             columnPassed = True
 
         if(mistake and columnPassed):
-            #TODO decrement points
-            #points -= 10
+            audio.play_mistake_audio()
+
             canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
             #so it will not go out of bounds and also handles last note case
@@ -167,10 +188,10 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 #canvas.itemconfig(ball, fill='red')
                 endofNotes = True
         elif((not mistake) and columnPassed):
-            #TODO increment points
             points += 10
             canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
+            soundHasBeenPlayedForColumn = False
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
                 detectIndex+=1
@@ -194,8 +215,6 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 elif (accuracy < 70.0):
                     print("test")
                     canvas.itemconfig(finalAccuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%'+ '\nTry easy next time')
-
-        #print("Points: " + str(points))
 
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
