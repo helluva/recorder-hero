@@ -167,12 +167,12 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
         recorderLineCenterX = 113
         columnDistanceFromRecorderLine = (ballCenterX - recorderLineCenterX)
 
-        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn:
+        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn and correctFingering == pressedFingers:
             note_to_play = note.note_for_recorder_press_combination(correctFingering)
 
             should_cut_short = False
 
-            for cut_short_time in cut_short_timings and correctFingering == pressedFingers:
+            for cut_short_time in cut_short_timings:
                 if abs(cut_short_time - (currentTimecode + 0.75)) < 0.2:
                     should_cut_short = True
 
