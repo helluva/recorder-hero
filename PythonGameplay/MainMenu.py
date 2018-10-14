@@ -51,9 +51,7 @@ def startGameplayForSong(song):
     cv.delete("all")
     radioFrame.pack_forget()
     startTime = time.time()
-    print(song)
-    print(songDifficulty)
-    MainGameplay.startGame(cv, Song.timed_finger_positions_for_song(song, songDifficulty), startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec=150, initialSongOffest=cvWidth)
+    MainGameplay.startGame(cv, song, songDifficulty, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec=150, initialSongOffest=0)
     createMainMenu()
 
 createMainMenu()
