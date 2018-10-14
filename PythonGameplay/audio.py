@@ -11,7 +11,8 @@ def play_note(note):
         return
 
     if (current_player is not None) or (note is None):
-        current_player.stop()
+        if current_player is not None:
+            current_player.stop()
         current_player = None
         current_note = None
 
