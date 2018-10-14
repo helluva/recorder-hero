@@ -13,7 +13,7 @@ class Song(Enum):
     Party_Rock_Anthem_by_LMFAO = auto()
     I_Gotta_Feeling_by_The_Black_Eyed_Peas = auto()
     Happy_Birthday = auto()
-    Star_Wars_Theme_by_John_Williams = auto()
+    Super_Mario_Theme_by_Koji_Kondo = auto()
 
 
 def timed_finger_positions_for_song(song, difficulty):

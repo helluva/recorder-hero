@@ -167,7 +167,7 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
 
             should_cut_short = False
 
-            for cut_short_time in cut_short_timings:
+            for cut_short_time in cut_short_timings and correctFingering == pressedFingers:
                 if abs(cut_short_time - (currentTimecode + 0.75)) < 0.2:
                     should_cut_short = True
 
