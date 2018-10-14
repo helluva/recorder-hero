@@ -19,7 +19,7 @@ class InputMode(Enum):
     KEYBOARD = 2
 
 
-CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+CURRENT_INPUT_MODE = InputMode.IOS_APP;
 
 
 def didUpdatePressedFingers(updatedFingers):
@@ -43,6 +43,8 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 #################
 
 def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
+    global pressedFingers
+
     #initailize noteline
 
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
@@ -88,7 +90,6 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
 
     #note movement
     while(True):
-        global pressedFingers
 
         server.check_for_updates()
 
