@@ -16,7 +16,6 @@ cvHeight = 700
 ballSize = 25
 cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
-#tk.resizable(False, False)
 cv.pack()
 
 def createMainMenu():
@@ -32,14 +31,9 @@ def createMainMenu():
 def startGameplayForSong(song):
     cv.delete("all")
     startTime = time.time()
-    MainGameplay.startGame(cv, Song.timed_finger_positions_for_song(song, Song.Difficulty.MEDIUM), startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec=150, initialSongOffest=cvWidth)
+    print(song)
+    MainGameplay.startGame(cv, Song.timed_finger_positions_for_song(song, Song.Difficulty.EASY), startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec=150, initialSongOffest=cvWidth)
     createMainMenu()
-
-
-# def returnToMenu(canvas):
-#     time.sleep(3)
-#     canvas.delete("all")
-#     createMainMenu()
 
 createMainMenu()
 tk.mainloop()
