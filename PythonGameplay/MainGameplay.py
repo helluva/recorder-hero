@@ -195,6 +195,22 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
             else:
                 #canvas.itemconfig(ball, fill='red')
                 endofNotes = True
+                accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
+                print(accuracy)
+                canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f' % accuracy) + '%')
+                if (accuracy == 100.0):
+                    canvas.itemconfig(finalAccuracyDisplay,
+                                      text='Accuracy: ' + str('%.1f' % accuracy) + '%' + '\nPerfect Score!')
+                elif (accuracy >= 80.0):
+                    canvas.itemconfig(finalAccuracyDisplay,
+                                      text='Accuracy: ' + str('%.1f' % accuracy) + '%' + '\nPretty Good!')
+                elif (accuracy >= 70.0):
+                    canvas.itemconfig(finalAccuracyDisplay,
+                                      text='Accuracy: ' + str('%.1f' % accuracy) + '%' + '\nAlmost There!')
+                elif (accuracy < 70.0):
+                    print("test")
+                    canvas.itemconfig(finalAccuracyDisplay,
+                                      text='Accuracy: ' + str('%.1f' % accuracy) + '%' + '\nTry easy next time')
         elif((not mistake) and columnPassed):
             points += 10
             canvas.itemconfig(pointDisplay, text="Points: " + str(points))
