@@ -52,7 +52,14 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
     finalAccuracyDisplay = canvas.create_text(cvWidth - 200, 200, font=('Times New Roman', 36), text='')
     accuracy = 0
-    accuracyDisplay = canvas.create_text(cvWidth - 80, 40, text='Accuracy: ' + str(accuracy) + '%', font=('Times New Roman', 15))
+    accuracyDisplay = canvas.create_text(cvWidth - 80, 40, text='Accuracy: ' + str(accuracy) + '%')
+    songName = str(song.name).replace("_", " ")
+    if ("by" in songName):
+        leftSongName = songName[:songName.index(" by")]
+        rightSongName = songName[songName.index(" by"):]
+        songName = leftSongName + '\n' + rightSongName[1:]
+
+    songTitleDisplay = canvas.create_text(cvWidth - 250, cvHeight - 50, font=('Times New Roman', 20), text=songName)
     darkLineBallList = []
 
     #create dark lineball markers
@@ -154,7 +161,7 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
         recorderLineCenterX = 113
         columnDistanceFromRecorderLine = (ballCenterX - recorderLineCenterX)
 
-        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn and (pressedFingers == correctFingering):
+        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn:
             note_to_play = note.note_for_recorder_press_combination(correctFingering)
 
             should_cut_short = False

@@ -61,7 +61,7 @@ def createMainMenu():
 
     for (index, song) in enumerate(list(Song.Song)):
         songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Times New Roman', 15))
-        window = cv.create_window(cvWidth / 2, 350 + (50 * index), window=songButton, width=350)
+        window = cv.create_window(cvWidth / 2, 350 + (50 * index), window=songButton, width=300)
 
 def difficultyChange(newSongDifficulty):
     global songDifficulty, songDifficulty_radioVariable
