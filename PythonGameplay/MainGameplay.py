@@ -23,7 +23,7 @@ class InputMode(Enum):
     KEYBOARD = 2
 
 
-CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+CURRENT_INPUT_MODE = InputMode.IOS_APP;
 
 
 def didUpdatePressedFingers(updatedFingers):
