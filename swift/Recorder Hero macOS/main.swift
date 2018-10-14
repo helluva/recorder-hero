@@ -17,7 +17,7 @@ import SwiftSocket
 // The socket to the python gameplay UI is over port ???
 
 let peertalkController = PTServerController()
-let socket = TCPClient(address: "localhost", port: 1503)
+let socket = TCPClient(address: "localhost", port: 1504)
 
 
 // MARK: - configure the Socket client

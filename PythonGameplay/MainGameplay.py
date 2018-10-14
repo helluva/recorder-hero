@@ -1,14 +1,11 @@
-from tkinter import *
 import time
 import keyboard
 import note
 import audio
 import server
 from enum import Enum
-from threading import Thread
 
 tk = None # dependency-injected from MainMenu
-
 
 
 ################
@@ -37,32 +34,9 @@ def bootstrap_input():
     elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
         keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
 
-
-
-#################
-# Tkinter setup #
-#################
-
-# cvWidth = 500
-# cvHeight = 700
-# ballSize = 25
-# cv = Canvas(tk, width=cvWidth, height=cvHeight)
-# tk.title("Recorder Hero")
-# tk.resizable(False, False)
-# cv.pack()
-
-# startTime = time.time()
-#
-# #this should be a list of lists of tuples 'representing columns' of finger placement coordinates
-# fingerPositions = []
-#
-# #below is dummy test call for now
-# fingerPositions = Song.getFingerPositions()
-
 # The finger positions currently being pressed.
 # This is driven by either the iOS app or the keyboard (depending on the current configuration)
 pressedFingers = [0, 0, 0, 0, 0, 0, 0]
-
 
 
 #################
@@ -139,8 +113,6 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 correctFingerIndex = int((ballY - 150)/50)
                 correctFingering[correctFingerIndex] = 1
             #if at any point the proper fingers were pressed
-            print("pressedFingers: " + str(pressedFingers))
-            print("correctFingering: " + str(correctFingering))
             if (pressedFingers == correctFingering):
                 for ball in columnToDetect[0:len(columnToDetect) - 1]:
                     canvas.itemconfig(ball, fill='green')
@@ -193,6 +165,3 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     time.sleep(3)
     canvas.delete("all")
     #tk.destroy()
-
-#startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=100, initialSongOffest=cvWidth)
-#tk.mainloop()
