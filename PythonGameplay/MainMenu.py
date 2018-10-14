@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 from PIL import ImageTk, Image
 import time
@@ -15,6 +16,12 @@ MainGameplay.bootstrap_input()
 cvWidth = 500
 cvHeight = 700
 ballSize = 25
+
+# place the window in the middle of the screen
+x = (tk.winfo_screenwidth() / 2) - (cvWidth/2)
+y = (tk.winfo_screenheight() / 2) - (cvHeight/2)
+tk.geometry('%dx%d+%d+%d' % (cvWidth, cvHeight, x, y - 25))
+
 cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
 cv.pack()
@@ -70,4 +77,6 @@ def startGameplayForSong(song):
     createMainMenu()
 
 createMainMenu()
+
+os.system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
 tk.mainloop()
