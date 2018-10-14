@@ -59,7 +59,8 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
         rightSongName = songName[songName.index(" by"):]
         songName = leftSongName + '\n' + rightSongName[1:]
 
-    songTitleDisplay = canvas.create_text(cvWidth - 250, cvHeight - 50, font=('Times New Roman', 20), text=songName)
+    songTitleDisplay = canvas.create_text(cvWidth - 275, cvHeight - 50, font=('Times New Roman', 20), text=songName)
+    difficultyDisplay = canvas.create_text(cvWidth - 50, cvHeight - 50, font=('Times New Roman', 20), text=str(difficulty.name)[0] + str(difficulty.name)[1:].swapcase())
     darkLineBallList = []
 
     #create dark lineball markers
