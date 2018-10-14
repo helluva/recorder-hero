@@ -23,7 +23,7 @@ class InputMode(Enum):
     KEYBOARD = 2
 
 
-CURRENT_INPUT_MODE = InputMode.KEYBOARD;
+CURRENT_INPUT_MODE = InputMode.IOS_APP;
 
 
 def didUpdatePressedFingers(updatedFingers):
@@ -167,7 +167,7 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
         recorderLineCenterX = 113
         columnDistanceFromRecorderLine = (ballCenterX - recorderLineCenterX)
 
-        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn:
+        if abs(columnDistanceFromRecorderLine) < 10 and not soundHasBeenPlayedForColumn and correctFingering == pressedFingers:
             note_to_play = note.note_for_recorder_press_combination(correctFingering)
 
             should_cut_short = False

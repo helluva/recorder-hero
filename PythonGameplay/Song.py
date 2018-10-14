@@ -10,11 +10,11 @@ class Difficulty(Enum):
 
 class Song(Enum):
     Hot_Cross_Buns = auto()
+    Happy_Birthday = auto()
     Party_Rock_Anthem_by_LMFAO = auto()
     I_Gotta_Feeling_by_The_Black_Eyed_Peas = auto()
-    Happy_Birthday = auto()
     Super_Mario_Theme_by_Koji_Kondo = auto()
-
+    Pirates_of_the_Caribbean_Theme_by_Hans_Zimmer = auto();
 
 def timed_finger_positions_for_song(song, difficulty):
     with open('songs/' + song.name.replace("_", " ") + '.csv', newline='') as csvfile:
