@@ -7,9 +7,13 @@ class Difficulty(Enum):
     MEDIUM = 2.0
     HARD = 1.0
 
+class Song(Enum):
+    Hot_Cross_Buns = 1
+    Party_Rock_Anthem_by_LMFAO = 2
+
 
 def timed_finger_positions_for_song(song, difficulty):
-    with open('songs/' + song + '.csv', newline='') as csvfile:
+    with open('songs/' + song.name.replace("_", " ") + '.csv', newline='') as csvfile:
         data = list(csv.reader(csvfile))
 
     timed_finger_positions = []
