@@ -43,7 +43,7 @@ def play_audio_file(file, cut_short=False):
         current_player = wav.play()
 
         if cut_short:
-            time.sleep(0.2)
+            time.sleep(0.25)
             if current_player is not None:
                 current_player.stop()
                 current_player = None

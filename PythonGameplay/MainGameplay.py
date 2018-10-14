@@ -140,8 +140,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
         # calculate the correct fingering for this column
         correctFingering = [0, 0, 0, 0, 0, 0, 0]
         for ball in columnToDetect[0:len(columnToDetect) - 1]:
-            # print(canvas.coords(ball))
-            canvas.itemconfig(ball, fill='black')
             ballY = canvas.coords(ball)[1]
 
             correctFingerIndex = int((ballY - 150) / 50)
@@ -156,7 +154,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
             note_to_play = note.note_for_recorder_press_combination(correctFingering)
 
             should_cut_short = False
-            currentTime = time.time()
 
             for cut_short_time in cut_short_timings:
                 if abs(cut_short_time - (currentTimecode + 0.75)) < 0.2:
@@ -187,7 +184,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 #canvas.itemconfig(ball, fill='red')
                 endofNotes = True
         elif((not mistake) and columnPassed):
-            #TODO increment points
             points += 10
             canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
@@ -198,8 +194,6 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 mistake = True
             else:
                 endofNotes = True
-
-        #print("Points: " + str(points))
 
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
