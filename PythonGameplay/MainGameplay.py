@@ -20,7 +20,7 @@ class InputMode(Enum):
     KEYBOARD = 2
 
 
-CURRENT_INPUT_MODE = InputMode.IOS_APP;
+CURRENT_INPUT_MODE = InputMode.KEYBOARD;
 
 
 def didUpdatePressedFingers(updatedFingers):
@@ -197,13 +197,13 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
                 detectIndex+=1
                 mistake = True
                 ammountCorrect += 1
-                accuracy = (ammountCorrect / len(fingerPositions)) * 100
+                accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
                 print(accuracy)
                 canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
             else:
                 endofNotes = True
                 ammountCorrect += 1
-                accuracy = (ammountCorrect / len(fingerPositions)) * 100
+                accuracy = (ammountCorrect / len(ballColumnsOnCanvas)) * 100
                 print(accuracy)
                 canvas.itemconfig(accuracyDisplay, text='Accuracy: ' + str('%.1f'%accuracy) + '%')
                 if (accuracy == 100.0):
