@@ -6,10 +6,10 @@ current_note = None
 def play_note(note, is_initial=True):
     global current_player, current_note
 
-    if current_note is note or note is None:
+    if current_note is note:
         return
 
-    if current_player is not None:
+    if (current_player is not None) or (note is None):
         current_player.stop()
         current_player = None
         current_note = None

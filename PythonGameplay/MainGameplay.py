@@ -6,11 +6,8 @@ import note
 import audio
 import server
 from enum import Enum
-from threading import Thread
 
 tk = Tk()
-
-
 
 ################
 # Input handling -- the currently pressed fingers are stored in `pressedFingers`. e.g. [1, 0, 0, 1, 0, 0, 0]
@@ -49,7 +46,7 @@ cvHeight = 700
 ballSize = 25
 cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
-tk.resizable(False, False)
+# tk.resizable(False, False)
 cv.pack()
 
 startTime = time.time()
@@ -58,7 +55,7 @@ startTime = time.time()
 fingerPositions = []
 
 #below is dummy test call for now
-fingerPositions = Song.getFingerPositions()
+fingerPositions = Song.timed_finger_positions_for_song('Hot Cross Buns', Song.Difficulty.MEDIUM)
 
 # The finger positions currently being pressed.
 # This is driven by either the iOS app or the keyboard (depending on the current configuration)
@@ -185,5 +182,5 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
     #closes window
     tk.destroy()
 
-startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=30, initialSongOffest=cvWidth)
+startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=150, initialSongOffest=cvWidth)
 tk.mainloop()
