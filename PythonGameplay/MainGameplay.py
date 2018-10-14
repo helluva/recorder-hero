@@ -48,16 +48,14 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
 
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
     tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
-    goodNoteBoundL = cvWidth/5 - ballSize
-    goodNoteBoundR = cvWidth/5 + ballSize
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
     darkLineBallList = []
 
     #create dark lineball markers
     for i in range(0, len(pressedFingers)):
-        darkLineBall = canvas.create_oval(goodNoteBoundL + 12, (i * 50) + 150,
-                                      goodNoteBoundL + 12 + ballSize, (i * 50) + 150 + ballSize,
-                                      fill='gray')
+        darkLineBall = canvas.create_oval(cvWidth/5 - 12.5, (i * 50) + 150,
+                                          cvWidth/5 - 12.5 + ballSize, (i * 50) + 150 + ballSize,
+                                          fill='gray')
         darkLineBallList.append(darkLineBall)
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
@@ -122,43 +120,33 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         #have negative effect if notes pressed outside
 
         columnToDetect = ballColumnsOnCanvas[detectIndex]
-        #if the left xValue for column or right XValue are within goodNoteLine
         colXLeft = canvas.coords(columnToDetect[0])[0]
-        colXRight = canvas.coords(columnToDetect[0])[2]
-        if (((colXLeft <= goodNoteBoundR + 15) and colXRight > goodNoteBoundR) or ((colXRight >= goodNoteBoundL - 15) and colXLeft < goodNoteBoundL)):
 
-            ballColSongTime = ballColumn[-1]
-            # the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
-            ballTimecode = (ballColSongTime - (currentTime - startTime))
+        # calculate the correct fingering for this column
+        correctFingering = [0, 0, 0, 0, 0, 0, 0]
+        for ball in columnToDetect[0:len(columnToDetect) - 1]:
+            # print(canvas.coords(ball))
+            canvas.itemconfig(ball, fill='black')
+            ballY = canvas.coords(ball)[1]
 
-            # if this is the ball's timecode, play the sound. still working on it.
-            if abs(ballTimecode) < 0.1:
-                columnPressCombination = ballColumn[0:-1]
-                audio.play_note(note.note_for_recorder_press_combination(columnPressCombination))
+            correctFingerIndex = int((ballY - 150) / 50)
+            correctFingering[correctFingerIndex] = 1
 
+        # if this is the ball is at the center, play the sound
+        ballCenterX = colXLeft + ballSize / 2
+        recorderLineCenterX = 113
+        columnDistanceFromRecorderLine = (ballCenterX - recorderLineCenterX)
 
-            correctFingering = [0, 0, 0, 0, 0, 0, 0]
+        if abs(columnDistanceFromRecorderLine) < 10 and (pressedFingers == correctFingering):
+            note_to_play = note.note_for_recorder_press_combination(correctFingering)
+            audio.play_note(note_to_play)
+
             for ball in columnToDetect[0:len(columnToDetect) - 1]:
-                #print(canvas.coords(ball))
-                canvas.itemconfig(ball, fill='black')
-                ballY = canvas.coords(ball)[1]
-
-                correctFingerIndex = int((ballY - 150)/50)
-                correctFingering[correctFingerIndex] = 1
-
-            # #refill moving ball(s) so that they will be over the lineballs
-            # for closeBalls in ballColumnsOnCanvas[detectIndex]:
-            #     canvas.itemconfig(closeBalls, fill='black')
-            #if at any point the proper fingers were pressed
-            if (pressedFingers == correctFingering):
-                for ball in columnToDetect[0:len(columnToDetect) - 1]:
-                    canvas.itemconfig(ball, fill='green')
-                mistake = False
+                canvas.itemconfig(ball, fill='green')
+            mistake = False
 
 
-
-
-        if (colXRight < goodNoteBoundL - 5 and not endofNotes):
+        if (columnDistanceFromRecorderLine < -10) and not endofNotes:
             columnPassed = True
 
         if(mistake and columnPassed):
