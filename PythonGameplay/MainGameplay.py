@@ -25,7 +25,6 @@ CURRENT_INPUT_MODE = InputMode.IOS_APP;
 def didUpdatePressedFingers(updatedFingers):
     global pressedFingers
     pressedFingers = updatedFingers
-    audio.play_note(note.note_for_recorder_press_combination(updatedFingers))
 
 def bootstrap_input():
     if CURRENT_INPUT_MODE is InputMode.IOS_APP:
@@ -96,18 +95,26 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         currentTime = time.time()
         #move all balls one 'movement'
         for ballColumn in ballColumnsOnCanvas:
-            #print("ballColumn: " + str(ballColumn))
             for ball in ballColumn[0:len(ballColumn) - 1]:
                 ballColSongTime = ballColumn[-1]
-                #print("ballColumnSongTime: " + str(ballColSongTime))
-                #print("preMove X coord" + str(canvas.coords(ball)[0]))
                 #the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
-                ballXPos = initialSongOffest + ((ballColSongTime - (currentTime - startTime)) * pixelsMovedPerSec)
-                #print("ballXPos " + str(ballXPos))
+                ballTimecode = (ballColSongTime - (currentTime - startTime))
+                ballXPos = initialSongOffest + (ballTimecode * pixelsMovedPerSec)
+
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
         canvas.update()
 
         time.sleep(0.001)
+
+
+        # temporary markers for what 'holes' are being pressed
+        for lineBall in darkLineBallList:
+            # unfill lineballs
+            canvas.itemconfig(lineBall, fill='gray')
+        for i in range(0, len(pressedFingers)):
+            if (pressedFingers[i] == 1):
+                # fill selected lineballs as 'selected'
+                canvas.itemconfig(darkLineBallList[i], fill='#e8ecf2')
 
 
         #after all ball columns have been updated
@@ -120,22 +127,25 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         colXRight = canvas.coords(columnToDetect[0])[2]
         if (((colXLeft <= goodNoteBoundR + 15) and colXRight > goodNoteBoundR) or ((colXRight >= goodNoteBoundL - 15) and colXLeft < goodNoteBoundL)):
 
+            ballColSongTime = ballColumn[-1]
+            # the 0 is for the y movement; temp offset of initialSongOffset Ex:(cvWidth + 60)
+            ballTimecode = (ballColSongTime - (currentTime - startTime))
+
+            # if this is the ball's timecode, play the sound. still working on it.
+            if abs(ballTimecode) < 0.1:
+                columnPressCombination = ballColumn[0:-1]
+                audio.play_note(note.note_for_recorder_press_combination(columnPressCombination))
+
+
             correctFingering = [0, 0, 0, 0, 0, 0, 0]
             for ball in columnToDetect[0:len(columnToDetect) - 1]:
                 #print(canvas.coords(ball))
                 canvas.itemconfig(ball, fill='black')
                 ballY = canvas.coords(ball)[1]
+
                 correctFingerIndex = int((ballY - 150)/50)
                 correctFingering[correctFingerIndex] = 1
 
-            #temporary markers for what 'holes' are being pressed
-            for lineBall in darkLineBallList:
-                #unfill lineballs
-                canvas.itemconfig(lineBall, fill='gray')
-            for i in range(0, len(pressedFingers)):
-                if (pressedFingers[i] == 1):
-                    #fill selected lineballs as 'selected'
-                    canvas.itemconfig(darkLineBallList[i], fill='#e8ecf2')
             # #refill moving ball(s) so that they will be over the lineballs
             # for closeBalls in ballColumnsOnCanvas[detectIndex]:
             #     canvas.itemconfig(closeBalls, fill='black')
