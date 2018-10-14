@@ -30,7 +30,7 @@ def didUpdatePressedFingers(updatedFingers):
 
 def bootstrap_input():
     if CURRENT_INPUT_MODE is InputMode.IOS_APP:
-        server.start_server(didUpdatePressedFingers)
+        server.connect_to_client(didUpdatePressedFingers)
     elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
         keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
 
@@ -45,6 +45,7 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 
 def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
     #initailize noteline
+
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
     tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
     goodNoteBoundL = cvWidth/5 - ballSize
@@ -53,7 +54,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
-    print(fingerPositions)
+
     for ballColumn in fingerPositions:
         newBallColumn = []
         # - 1 to not index the time
@@ -69,7 +70,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         #append the time of col to end of newBallColumn
         newBallColumn.append(ballColumn[-1])
         ballColumnsOnCanvas.append(newBallColumn)
-        print ("columnAdded")
+        #print ("columnAdded")
 
     detectIndex = 0
     points = 0
@@ -79,6 +80,9 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
     endofNotes = False
     #note movement
     while(True):
+
+        server.check_for_updates()
+
         currentTime = time.time()
         #move all balls one 'movement'
         for ballColumn in ballColumnsOnCanvas:
@@ -92,7 +96,8 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
                 #print("ballXPos " + str(ballXPos))
                 canvas.move(ball, ballXPos - canvas.coords(ball)[0], 0)
         canvas.update()
-        time.sleep(0.01)
+
+        time.sleep(0.001)
 
 
         #after all ball columns have been updated
@@ -148,7 +153,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
             else:
                 endofNotes = True
 
-        print("Points: " + str(points))
+        #print("Points: " + str(points))
 
 
 
@@ -156,6 +161,7 @@ def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, p
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
             break
     #end current song and return back to selection menu
+    audio.play_note(None)
     time.sleep(3)
     canvas.delete("all")
     #tk.destroy()

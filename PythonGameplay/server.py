@@ -1,48 +1,47 @@
+import fcntl
+import os
 import socket
-import sys
-import time
-from threading import Thread
 
 
-def server_loop(pressed_keys_update_handler):
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('localhost', 1503))
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+connection = None
+pressed_keys_update_handler = None
 
-    server.listen(1)
+def connect_to_client(new_pressed_keys_update_handler):
+    global server, connection, pressed_keys_update_handler
 
-    print("Waiting for a connection...")
+    # move to non-blocking mode
+    fcntl.fcntl(server, fcntl.F_SETFL, os.O_NONBLOCK)
 
-    while True:
-        print("Waiting for a connection....")
-        connection, client = server.accept()
+    server.bind(('localhost', 1509))
+    server.listen(10)
 
-        print("Received connection")
+    pressed_keys_update_handler = new_pressed_keys_update_handler
 
+    print("Waiting for a connection....")
+    while connection == None: #still block launch until a connection is available
         try:
-            while True:
-                time.sleep(1.0)
-                # first, recive a three-byte header that declares how large the message is
-                messageSize = int(connection.recv(3))
-
-                # then we can receive the full message
-                message = connection.recv(messageSize).decode('utf8')
-                print("message::", message)
-
-                if len(message) is 7: #recorder info
-                    pressed_keys_update_handler(list(message))
+            connection, client = server.accept()
+        except BlockingIOError:
+            continue
 
 
-        except KeyboardInterrupt:
-            print("Closing connection.")
-            connection.close()
-            server.close()
-            exit()
-        finally:
-            connection.close()
-            server.close()
+    print("Received connection")
 
-def start_server(pressed_keys_update_handler):
-    thread = Thread(target=server_loop, args=(pressed_keys_update_handler,))
-    thread.daemon = True
-    thread.start()
 
+def check_for_updates():
+    global connection, pressed_keys_update_handler
+
+    if connection is None or pressed_keys_update_handler is None:
+        return
+
+    try:
+        messageSize = int(connection.recv(3))
+    except BlockingIOError:
+        return
+
+    # then we can receive the full message
+    message = connection.recv(messageSize).decode('utf8')
+
+    if len(message) is 7:  # recorder info
+        pressed_keys_update_handler(list(message))
