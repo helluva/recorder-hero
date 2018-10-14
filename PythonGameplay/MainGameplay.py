@@ -1,6 +1,5 @@
 from tkinter import *
 import time
-import Song
 import keyboard
 import note
 import audio
@@ -8,7 +7,7 @@ import server
 from enum import Enum
 from threading import Thread
 
-tk = Tk()
+tk = None # dependency-injected from MainMenu
 
 
 
@@ -32,11 +31,11 @@ def didUpdatePressedFingers(updatedFingers):
 
     audio.play_note(note.note_for_recorder_press_combination(updatedFingers))
 
-
-if CURRENT_INPUT_MODE is InputMode.IOS_APP:
-    server.start_server(didUpdatePressedFingers)
-elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
-    keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
+def bootstrap_input():
+    if CURRENT_INPUT_MODE is InputMode.IOS_APP:
+        server.start_server(didUpdatePressedFingers)
+    elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
+        keyboard.configure_keyboard_listener(tk, didUpdatePressedFingers)
 
 
 
@@ -44,21 +43,21 @@ elif CURRENT_INPUT_MODE is InputMode.KEYBOARD:
 # Tkinter setup #
 #################
 
-cvWidth = 500
-cvHeight = 700
-ballSize = 25
-cv = Canvas(tk, width=cvWidth, height=cvHeight)
-tk.title("Recorder Hero")
-tk.resizable(False, False)
-cv.pack()
+# cvWidth = 500
+# cvHeight = 700
+# ballSize = 25
+# cv = Canvas(tk, width=cvWidth, height=cvHeight)
+# tk.title("Recorder Hero")
+# tk.resizable(False, False)
+# cv.pack()
 
-startTime = time.time()
-
-#this should be a list of lists of tuples 'representing columns' of finger placement coordinates
-fingerPositions = []
-
-#below is dummy test call for now
-fingerPositions = Song.getFingerPositions()
+# startTime = time.time()
+#
+# #this should be a list of lists of tuples 'representing columns' of finger placement coordinates
+# fingerPositions = []
+#
+# #below is dummy test call for now
+# fingerPositions = Song.getFingerPositions()
 
 # The finger positions currently being pressed.
 # This is driven by either the iOS app or the keyboard (depending on the current configuration)
@@ -70,16 +69,17 @@ pressedFingers = [0, 0, 0, 0, 0, 0, 0]
 # Main run loop #
 #################
 
-def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSongOffest):
+def startGame(canvas, fingerPositions, startTime, cvWidth, cvHeight, ballSize, pixelsMovedPerSec, initialSongOffest):
     #initailize noteline
-    noteLine = cv.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
-    tempLine = cv.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
+    noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
+    tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
     goodNoteBoundL = cvWidth/5 - ballSize
     goodNoteBoundR = cvWidth/5 + ballSize
-    pointDisplay = cv.create_text(cvWidth - 80, 20, text='Points: 0')
+    pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
 
     #initialize all columns of balls out of bounds of the canvas at positions based on their time
     ballColumnsOnCanvas = []
+    print(fingerPositions)
     for ballColumn in fingerPositions:
         newBallColumn = []
         # - 1 to not index the time
@@ -89,17 +89,17 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
                 #position balls based on time, the X is based on the time value, ballCoordY is the hardcoded height value
                 ballXPos = (cvWidth + 200) + (ballColSongTime*pixelsMovedPerSec)
                 #print("startPos" + str(ballXPos))
-                ball = cv.create_oval(ballXPos, (i * 50) + 150, ballXPos + ballSize, (i * 50) + 150 + ballSize,
+                ball = canvas.create_oval(ballXPos, (i * 50) + 150, ballXPos + ballSize, (i * 50) + 150 + ballSize,
                                       fill='black')
                 newBallColumn.append(ball)
         #append the time of col to end of newBallColumn
         newBallColumn.append(ballColumn[-1])
         ballColumnsOnCanvas.append(newBallColumn)
-        #print ("columnAdded")
+        print ("columnAdded")
 
     detectIndex = 0
     points = 0
-    outsidePressLength = 0
+    outsidePressLength = 1
     mistake = True
     columnPassed = False
     endofNotes = False
@@ -123,7 +123,7 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
 
         #after all ball columns have been updated
         #detect if proper notes are pressed in noteLine
-        #TODO have negative effect if notes pressed outside
+        #have negative effect if notes pressed outside
 
         columnToDetect = ballColumnsOnCanvas[detectIndex]
         #if the left xValue for column or right XValue are within goodNoteLine
@@ -143,6 +143,7 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
             if (pressedFingers == correctFingering):
                 mistake = False
         else:
+            #TODO POSSIBLE BUG AREA!!!!!
             #if buttons pressed outside you lose points
             if (pressedFingers != [0, 0, 0, 0, 0, 0, 0] and outsidePressLength%15 == 0):
                 points -= 10
@@ -151,13 +152,13 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
 
 
 
-        if (colXRight < goodNoteBoundL and not endofNotes):
+        if (colXRight < goodNoteBoundL - 20 and not endofNotes):
             columnPassed = True
 
         if(mistake and columnPassed):
             #TODO decrement points
             points -= 10
-            cv.itemconfig(pointDisplay, text="Points: " + str(points))
+            canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
@@ -167,7 +168,7 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
         elif((not mistake) and columnPassed):
             #TODO increment points
             points += 10
-            cv.itemconfig(pointDisplay, text="Points: " + str(points))
+            canvas.itemconfig(pointDisplay, text="Points: " + str(points))
             columnPassed = False
             #so it will not go out of bounds and also handles last note case
             if (detectIndex < len(ballColumnsOnCanvas) - 1):
@@ -182,8 +183,10 @@ def startGame(canvas, fingerPositions, startTime, pixelsMovedPerSec, initialSong
         #if the right XCoord of the last column is past the left window boundary end the game
         if (canvas.coords(ballColumnsOnCanvas[-1][0])[2] < 0):
             break
-    #closes window
-    tk.destroy()
+    #end current song and return back to selection menu
+    time.sleep(3)
+    canvas.delete("all")
+    #tk.destroy()
 
-startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=30, initialSongOffest=cvWidth)
-tk.mainloop()
+#startGame(cv, fingerPositions, startTime, pixelsMovedPerSec=100, initialSongOffest=cvWidth)
+#tk.mainloop()
