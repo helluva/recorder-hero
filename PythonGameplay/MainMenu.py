@@ -19,38 +19,48 @@ cv = Canvas(tk, width=cvWidth, height=cvHeight)
 tk.title("Recorder Hero")
 cv.pack()
 radioFrame = Frame(tk)
+recorderHeroTitleImage = ImageTk.PhotoImage(image=Image.open('recorderHero-500.jpg'))
+
 #default difficulty
 songDifficulty = Song.Difficulty.EASY
+songDifficulty_radioVariable = StringVar(value=songDifficulty.name)
+
 
 def createMainMenu():
+    global songDifficulty_radioVariable
     radioFrame.pack()
 
-    selectedDifficulty = StringVar()
+    rbEasy = Radiobutton(radioFrame,
+        text="Easy\n\n", variable=songDifficulty_radioVariable, value="EASY",
+        font=('Times New Roman', 15),
+        command=lambda: difficultyChange(Song.Difficulty.EASY))
 
-    rbEasy = Radiobutton(radioFrame, text="Easy", variable=selectedDifficulty, value="E", command=lambda: difficultyChange(Song.Difficulty.EASY))
+    rbMedium = Radiobutton(radioFrame,
+        text="Medium\n\n", variable=songDifficulty_radioVariable, value="MEDIUM",
+        font=('Times New Roman', 15),
+        command=lambda: difficultyChange(Song.Difficulty.MEDIUM))
+
+    rbHard = Radiobutton(radioFrame,
+        text="Hard\n\n", variable=songDifficulty_radioVariable, value="HARD",
+        font=('Times New Roman', 15),
+        command=lambda: difficultyChange(Song.Difficulty.HARD))
+
     rbEasy.grid(row=1, column=1)
-    rbEasy.focus_set()
-
-    rbMedium = Radiobutton(radioFrame, text="Medium", variable=selectedDifficulty, value="M", command=lambda: difficultyChange(Song.Difficulty.MEDIUM))
     rbMedium.grid(row=1, column=2)
-
-    rbHard = Radiobutton(radioFrame, text="Hard", variable=selectedDifficulty, value="H", command=lambda: difficultyChange(Song.Difficulty.HARD))
     rbHard.grid(row=1, column=3)
 
-
-    #titleDisplay = cv.create_text(cvWidth / 2, 100, text='Recorder Hero', font=('Verdana', 36))
-    recorderHeroTitleImage = Image.open('recorderHero.jpg')
-    print(recorderHeroTitleImage)
-    recorderHeroTitleImage = ImageTk.PhotoImage(image=recorderHeroTitleImage, size=100)
-    titleDisplay = cv.create_image(cvWidth / 2, 100, image=recorderHeroTitleImage)
+    global recorderHeroTitleImage
+    cv.create_image(250, 155, image=recorderHeroTitleImage)
 
     for (index, song) in enumerate(list(Song.Song)):
-        songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Verdana', 16))
-        window = cv.create_window(cvWidth / 2, 250 + (50 * index), window=songButton, width=300)
+        songButton = Button(text=song.name.replace('_', ' '), command=lambda song=song: startGameplayForSong(song), font=('Times New Roman', 15))
+        window = cv.create_window(cvWidth / 2, 350 + (50 * index), window=songButton, width=350)
 
 def difficultyChange(newSongDifficulty):
-    global songDifficulty
+    global songDifficulty, songDifficulty_radioVariable
     songDifficulty = newSongDifficulty
+    songDifficulty_radioVariable.set(newSongDifficulty.name)
+    print(songDifficulty_radioVariable.get())
 
 def startGameplayForSong(song):
     cv.delete("all")

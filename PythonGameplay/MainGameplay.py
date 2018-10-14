@@ -50,9 +50,9 @@ def startGame(canvas, song, difficulty, startTime, cvWidth, cvHeight, ballSize, 
     noteLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, width='25', fill='gray')
     tempLine = canvas.create_line(cvWidth/5, 0, cvWidth/5, cvHeight, fill='black')
     pointDisplay = canvas.create_text(cvWidth - 80, 20, text='Points: 0')
-    finalAccuracyDisplay = canvas.create_text(cvWidth - 200, 200, font=('Verdana', 36), text='')
+    finalAccuracyDisplay = canvas.create_text(cvWidth - 200, 200, font=('Times New Roman', 36), text='')
     accuracy = 0
-    accuracyDisplay = canvas.create_text(cvWidth - 80, 40, text='Accuracy: ' + str(accuracy) + '%')
+    accuracyDisplay = canvas.create_text(cvWidth - 80, 40, text='Accuracy: ' + str(accuracy) + '%', font=('Times New Roman', 15))
     darkLineBallList = []
 
     #create dark lineball markers

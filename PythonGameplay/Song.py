@@ -5,8 +5,8 @@ from enum import Enum, auto
 
 class Difficulty(Enum):
     EASY = 4.0
-    MEDIUM = 2.0
-    HARD = 1.0
+    MEDIUM = 3.0
+    HARD = 2.0
 
 class Song(Enum):
     Hot_Cross_Buns = auto()
