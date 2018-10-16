@@ -1,0 +1,2 @@
+# Exclude the Peertalk source from any language composition calculations
+swift/Peertalk/* linguist-vendored
